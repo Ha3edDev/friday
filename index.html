@@ -728,6 +728,7 @@ function checkPin(){
     setTimeout(()=>{pinStr='';updateDots();},400);
   }
 }
+try{localStorage.removeItem('fri_lock_'+fp());}catch(e){}
 loadLockState();
 
 /* ── THEME ── */
