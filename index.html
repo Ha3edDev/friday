@@ -443,16 +443,15 @@ body{background:var(--bg0);color:var(--text1);font-family:'Vazirmatn',sans-serif
     <div class="pin-dot" id="pd0"></div><div class="pin-dot" id="pd1"></div>
     <div class="pin-dot" id="pd2"></div><div class="pin-dot" id="pd3"></div>
   </div>
-  <div class="numpad">
-    <button class="nbtn" onclick="pinPress('1')">1</button><button class="nbtn" onclick="pinPress('2')">2</button><button class="nbtn" onclick="pinPress('3')">3</button>
-    <button class="nbtn" onclick="pinPress('4')">4</button><button class="nbtn" onclick="pinPress('5')">5</button><button class="nbtn" onclick="pinPress('6')">6</button>
-    <button class="nbtn" onclick="pinPress('7')">7</button><button class="nbtn" onclick="pinPress('8')">8</button><button class="nbtn" onclick="pinPress('9')">9</button>
-    <button class="nbtn empty"></button><button class="nbtn" onclick="pinPress('0')">0</button><button class="nbtn del" onclick="pinDel()">⌫</button>
+  <div class="numpad" id="numpad">
+    <button class="nbtn">1</button><button class="nbtn">2</button><button class="nbtn">3</button>
+    <button class="nbtn">4</button><button class="nbtn">5</button><button class="nbtn">6</button>
+    <button class="nbtn">7</button><button class="nbtn">8</button><button class="nbtn">9</button>
+    <button class="nbtn empty"></button><button class="nbtn">0</button><button class="nbtn del">⌫</button>
   </div>
   <div class="lock-msg" id="lockMsg">// رمز اشتباه است</div>
   <div class="lock-cd" id="lockCd"></div>
 </div>
-
 <!-- APP -->
 <div class="app" id="app" style="display:none">
   <!-- HEADER -->
