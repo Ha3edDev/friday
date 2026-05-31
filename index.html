@@ -684,6 +684,12 @@ body{background:var(--bg0);color:var(--text1);font-family:'Vazirmatn',sans-serif
 <div class="toast" id="toast"></div>
 
 <script>
+  document.getElementById('numpad').addEventListener('click',e=>{
+  const b=e.target.closest('.nbtn');
+  if(!b||b.classList.contains('empty'))return;
+  if(b.classList.contains('del'))pinDel();
+  else pinPress(b.textContent.trim());
+});
 const API="https://script.google.com/macros/s/AKfycbzxljrF2WvzSJ0xFtxEoFh8Y5QSwg-Kp2LxO-nSJzzoZ10JzYdqcWk3g0vwrHg4Dru0AA/exec";
 const PIN="5941";
 const OMDB="7470d23b";
