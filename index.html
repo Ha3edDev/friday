@@ -928,67 +928,46 @@ body{
 <!-- APP -->
 <div class="app" id="app" style="display:none">
 
-  <!-- HEADER HUD -->
-  <div class="header">
-    <div class="hdr-scan"></div>
+<!-- HEADER HUD -->
+<div class="header">
+  <div class="hdr-scan"></div>
 
-    <!-- Info strip -->
-    <div class="hdr-strip">
-      <div class="hdr-strip-left">
-        <span id="stripCoords">32.04°N 48.85°E</span>
-        <div class="strip-sep"></div>
-        <span id="stripDate2">—</span>
-      </div>
-      <div class="hdr-strip-center" id="stripCenter">// TACTICAL OS v3.1 //</div>
-      <div class="hdr-strip-right">
-        <span id="stripUptime">UP: 00:00</span>
-        <div class="strip-sep"></div>
-        <span>SHU-IR</span>
-      </div>
+  <div class="hdr-strip">
+    <div class="hdr-strip-left">
+      <span id="stripCoords">32.04°N 48.85°E</span>
+      <div class="strip-sep"></div>
+      <span id="stripDate2">—</span>
+    </div>
+    <div class="hdr-strip-center" id="stripCenter">// TACTICAL OS v3.1 //</div>
+    <div class="hdr-strip-right">
+      <span id="stripUptime">UP: 00:00</span>
+      <div class="strip-sep"></div>
+      <span>SHU-IR</span>
+    </div>
+  </div>
+
+  <div class="hdr-top">
+    <!-- LEFT: ساعت + دکمه‌ها -->
+    <div class="hdr-left">
+      <div class="hdr-clock" id="headerClock">--:--</div>
+      <div class="hdr-vsep"></div>
+      <div class="hbtn" onclick="openSearch(this)">...</div>
+      <div class="hbtn" onclick="openTheme(this)">...</div>
+      <div class="hbtn" onclick="refreshHome(this)">...</div>
     </div>
 
-    <!-- Main row -->
-    <div class="hdr-top">
-      <div class="hdr-slash">/</div>
-
-      <!-- LEFT -->
-      <div class="hdr-left">
-        <div class="hbtn" onclick="openSearch(this)">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        </div>
-        <div class="hbtn" onclick="openTheme(this)">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
-        </div>
-        <div class="hbtn" onclick="refreshHome(this)">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-        </div>
-        <div class="hdr-vsep"></div>
-        <div class="hdr-clock" id="headerClock">--:--</div>
-      </div>
-
-      <!-- RIGHT: brand -->
-      <div class="hdr-right">
+    <!-- RIGHT: برند + hex -->
+    <div class="hdr-right" style="flex-direction:row;align-items:center;gap:10px;">
+      <div>
         <div class="hdr-brand" id="hdrBrand">F.R.I.D.A.Y</div>
         <div class="hdr-sub">// MISSION CONTROL</div>
       </div>
+      <div style="...hex styles..."></div>
     </div>
-
-    <!-- Status row -->
-    <div class="hdr-bottom">
-      <div class="radar-wrap">
-        <div class="radar">
-          <div class="radar-ring"></div><div class="radar-ring"></div>
-          <div class="radar-dot" id="statusDot"></div>
-        </div>
-        <span class="stxt" id="statusTxt">در حال اتصال</span>
-      </div>
-      <div class="hdr-date" id="headerDate"></div>
-    </div>
-    <div class="hdr-line"></div>
   </div>
 
-  <div class="pages" id="pages">
-
+  <div class="hdr-line"></div>
+</div>
     <!-- HOME -->
     <div class="page active" id="page-home">
       <div class="home-widgets">
