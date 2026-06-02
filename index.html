@@ -1195,27 +1195,51 @@ async function loadHome(){
 
 // parse from object (stats_full endpoint returns obj with header keys)
 function parseRowObj(obj){
-  // Map header names to our structure
   const get=(k,fallback='')=>{
     const val=obj[k];
     return val!==undefined&&val!==null?String(val).trim():fallback;
   };
+  
   const answers=[];
   for(let q=1;q<=12;q++){
-    const ans=get(`س${q} – جواب`)||get(`س ${q} - جواب`)||get(`س${q} – جواب`)||'';
-    const cmt=get(`س${q} – نظر`)||get(`س ${q} - نظر`)||'';
-    const time=get(`س${q} – زمان`)||get(`س ${q} – زمان`)||'';
-    if(ans)answers.push({qId:q,answer:ans,comment:cmt||null,time:time||null});
+    let ans='', cmt='', time='';
+    
+    if(q===12){
+      // سوال ۱۲ header های مختلف داره
+      ans = get(`س 12 - جواب`) || get(`س12 – جواب`) || get(`سوال 12 - جواب`) || '';
+      cmt = get(`سوال 12 - نظر`) || get(`س12 – نظر`) || get(`س 12 - نظر`) || '';
+      time = get(`س12 – زمان`) || get(`س 12 - زمان`) || '';
+    } else {
+      ans  = get(`س${q} – جواب`) || get(`س${q} - جواب`) || '';
+      cmt  = get(`س${q} – نظر`)  || get(`س${q} - نظر`)  || '';
+      time = get(`س${q} – زمان`) || get(`س${q} - زمان`) || '';
+    }
+    
+    if(ans) answers.push({qId:q, answer:ans, comment:cmt||null, time:time||null});
   }
+  
   const scores=[];
-  for(let i=1;i<=8;i++){const v=obj[`س${i} امتیاز`];if(v!==''&&v!=null)scores.push({qId:i,score:parseFloat(v)||0});}
+  for(let i=1;i<=8;i++){
+    const v=obj[`س${i} امتیاز`];
+    if(v!==''&&v!=null&&v!==undefined) scores.push({qId:i,score:parseFloat(v)||0});
+  }
+  
   return{
-    name:get('نام','—'), age:get('سن','—'), gender:get('جمسیت')||get('جنسیت'),
-    province:get('استان'), avatar:get('🧑 آواتار'), theme:get('پوسته'),
-    source:get('منبع ورود'), totalTime:get('⏳ جمع زمان (ثانیه)'),
-    unanswered:get('❌ بی‌جواب','0'), speed:get('📊 سرعت'),
-    risk:get('🎯 Risk Score'), profile:get('profile'), cohort:get('👥 Cohort'),
-    answers, scores, date:get('تاریخ و ساعت')
+    name:    get('نام','—'),
+    age:     get('سن','—'),
+    gender:  get('جمسیت') || get('جنسیت'),   // ← غلط‌نویسی شیت
+    province:get('استان'),
+    avatar:  get('🧑 آواتار'),
+    theme:   get('پوسته'),
+    source:  get('منبع ورود'),
+    totalTime: get('⏳ جمع زمان (ثانیه)'),
+    unanswered:get('❌ بی‌جواب','0'),
+    speed:   get('📊 سرعت'),
+    risk:    get('🎯 Risk Score'),
+    profile: get('profile'),
+    cohort:  get('👥 Cohort'),
+    answers, scores,
+    date:    get('تاریخ و ساعت')
   };
 }
 
