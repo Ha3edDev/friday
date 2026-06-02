@@ -1196,50 +1196,63 @@ async function loadHome(){
 // parse from object (stats_full endpoint returns obj with header keys)
 function parseRowObj(obj){
   const get=(k,fallback='')=>{
-    const val=obj[k];
-    return val!==undefined&&val!==null?String(val).trim():fallback;
+    for(const key of Object.keys(obj)){
+      if(key.trim()===k.trim()){
+        const val=obj[key];
+        return val!==undefined&&val!==null?String(val).trim():fallback;
+      }
+    }
+    return fallback;
   };
   
   const answers=[];
-  for(let q=1;q<=12;q++){
-    let ans='', cmt='', time='';
-    
-    if(q===12){
-      // سوال ۱۲ header های مختلف داره
-      ans = get(`س 12 - جواب`) || get(`س12 – جواب`) || get(`سوال 12 - جواب`) || '';
-      cmt = get(`سوال 12 - نظر`) || get(`س12 – نظر`) || get(`س 12 - نظر`) || '';
-      time = get(`س12 – زمان`) || get(`س 12 - زمان`) || '';
-    } else {
-      ans  = get(`س${q} – جواب`) || get(`س${q} - جواب`) || '';
-      cmt  = get(`س${q} – نظر`)  || get(`س${q} - نظر`)  || '';
-      time = get(`س${q} – زمان`) || get(`س${q} - زمان`) || '';
-    }
-    
-    if(ans) answers.push({qId:q, answer:ans, comment:cmt||null, time:time||null});
+  for(let q=1;q<=8;q++){
+    const ans=get(`س${q} – جواب`)||get(`س${q} - جواب`)||'';
+    const cmt=get(`س${q} – نظر`)||get(`س${q} - نظر`)||'';
+    const time=get(`س${q} – زمان`)||get(`س${q} - زمان`)||'';
+    if(ans)answers.push({qId:q,answer:ans,comment:cmt||null,time:time||null});
   }
   
   const scores=[];
   for(let i=1;i<=8;i++){
-    const v=obj[`س${i} امتیاز`];
-    if(v!==''&&v!=null&&v!==undefined) scores.push({qId:i,score:parseFloat(v)||0});
+    const v=get(`س${i} امتیاز`);
+    if(v!==''&&v!==null)scores.push({qId:i,score:parseFloat(v)||0});
   }
   
+  let avatarVal='';
+  for(const key of Object.keys(obj)){
+    if(key.includes('آواتار')){avatarVal=String(obj[key]||'').trim();break;}
+  }
+  
+  let ageVal='—';
+  for(const key of Object.keys(obj)){
+    if(key.trim()==='سن'){ageVal=String(obj[key]||'—').trim();break;}
+  }
+
+  // جنسیت — جستجو با includes چون تایپو داره
+  let genderVal='';
+  for(const key of Object.keys(obj)){
+    if(key.includes('جنسیت')||key.includes('جمسیت')||key.includes('جنسيت')){
+      genderVal=String(obj[key]||'').trim();break;
+    }
+  }
+
   return{
-    name:    get('نام','—'),
-    age:     get('سن','—'),
-    gender:  get('جنسیت') || get('جنسیت'),   // ← غلط‌نویسی شیت
-    province:get('استان'),
-    avatar:  get('🧑 آواتار'),
-    theme:   get('پوسته'),
-    source:  get('منبع ورود'),
+    name:      get('نام','—'),
+    age:       ageVal,
+    gender:    genderVal,
+    province:  get('استان'),
+    avatar:    avatarVal,
+    theme:     get('پوسته'),
+    source:    get('منبع ورود'),
     totalTime: get('⏳ جمع زمان (ثانیه)'),
     unanswered:get('❌ بی‌جواب','0'),
-    speed:   get('📊 سرعت'),
-    risk:    get('🎯 Risk Score'),
-    profile: get('profile'),
-    cohort:  get('👥 Cohort'),
-    answers, scores,
-    date:    get('تاریخ و ساعت')
+    speed:     get('📊 سرعت'),
+    risk:      get('🎯 Risk Score'),
+    profile:   get('profile'),
+    cohort:    get('👥 Cohort'),
+    answers,scores,
+    date:      get('تاریخ و ساعت')
   };
 }
 
@@ -1417,7 +1430,7 @@ function renderQuestions(rows){
       if(a.time)qMap[a.qId].times.push(parseFloat(a.time)||0);
     });
   });
-  return`<div class="q-analysis-list">${Object.entries(qMap).sort((a,b)=>parseInt(a[0])-parseInt(b[0])).map(([qid,data])=>{
+  return`<div class="q-analysis-list">${Object.entries(qMap).sort((a,b)=>Number(a[0])-Number(b[0])).map(([qid,data])=>{
     const ansArr=Object.entries(data.ans).sort((a,b)=>b[1]-a[1]);
     const total=ansArr.reduce((a,b)=>a+b[1],0)||1;
     const mx=ansArr[0]?ansArr[0][1]:1;
@@ -1438,8 +1451,8 @@ function renderQuestions(rows){
 function renderTypes(rows,d){
   const tMap={};
   rows.forEach(r=>{
-    const k=r.profile||r.avatar||'نامشخص';
-    if(k&&k!=='نامشخص')tMap[k]=(tMap[k]||0)+1;
+    const k=r.avatar||r.profile||'';
+     if(k)tMap[k]=(tMap[k]||0)+1;
   });
   if(!Object.keys(tMap).length)return'<div class="empty-state">// داده‌ی پروفایل موجود نیست</div>';
   const total=rows.length||1;
