@@ -723,15 +723,78 @@ function riskBadge(score){const s=parseFloat(score)||0;if(s<40)return`<span clas
    A=تاریخ B=جنسیت C=استان D=نام E=سن F=آواتار G=پوسته H=منبع
    I-AE = س1-س8 (هر 3: جواب/نظر/زمان)
 */
-function parseRowObj(obj){
-  const get=(k,fb='')=>{for(const key of Object.keys(obj)){if(key.trim()===k.trim()){const v=obj[key];return v!==undefined&&v!==null?String(v).trim():fb;}}return fb;};
-  const answers=[];
-  for(let q=1;q<=8;q++){
-    const ans=get(`س${q} – جواب`)||get(`س${q} - جواب`)||'';
-    const cmt=get(`س${q} – نظر`)||get(`س${q} - نظر`)||'';
-    const time=get(`س${q} – زمان`)||get(`س${q} - زمان`)||'';
-    if(ans)answers.push({qId:q,answer:ans,comment:cmt||null,time:time||null});
+function parseRowObj(obj) {
+  // یه getter هوشمند که همه فضاها و داش‌ها رو نرمال می‌کنه
+  const norm = s => String(s||'')
+    .trim()
+    .replace(/\s+/g, ' ')
+    .replace(/–/g, '-')   // داش فارسی → انگلیسی
+    .replace(/‐/g, '-')   // انواع دیگه داش
+    .toLowerCase();
+
+  const keys = Object.keys(obj);
+  
+  const get = (pattern, fb='') => {
+    const np = norm(pattern);
+    const key = keys.find(k => norm(k) === np);
+    if (key !== undefined) {
+      const v = obj[key];
+      return v !== undefined && v !== null ? String(v).trim() : fb;
+    }
+    return fb;
+  };
+
+  // برای سوال‌ها از ۱ تا ۱۲
+  const answers = [];
+  for (let q = 1; q <= 12; q++) {
+    // همه فرمت‌های ممکن رو امتحان کن
+    const ans = get(`س${q} – جواب`) || get(`س${q} - جواب`) 
+              || get(`س ${q} - جواب`) || get(`س ${q} – جواب`);
+    const cmt = get(`س${q} – نظر`) || get(`س${q} - نظر`)
+              || get(`سوال ${q} - نظر`) || get(`سوال ${q} – نظر`);
+    const time = get(`س${q} – زمان`) || get(`س${q} - زمان`)
+               || get(`س ${q} - زمان`) || get(`س ${q} – زمان`);
+    if (ans) answers.push({ qId: q, answer: ans, comment: cmt||null, time: time||null });
   }
+
+  // امتیازها هم همینطور
+  const scores = [];
+  for (let i = 1; i <= 12; i++) {
+    const v = get(`س${i} امتیاز`) || get(`س ${i} امتیاز`);
+    if (v !== '' && v != null) scores.push({ qId: i, score: parseFloat(v)||0 });
+  }
+
+  // فیلدهای خاص
+  const avatarKey = keys.find(k => String(k).includes('آواتار'));
+  const avatarVal = avatarKey ? String(obj[avatarKey]||'').trim() : '';
+  
+  const ageKey = keys.find(k => norm(k) === 'سن');
+  const ageVal = ageKey ? String(obj[ageKey]||'—').trim() : '—';
+  
+  const genderKey = keys.find(k => 
+    String(k).includes('جنسیت') || String(k).includes('جمسیت') || String(k).includes('جنسيت')
+  );
+  const genderVal = genderKey ? String(obj[genderKey]||'').trim() : '';
+
+  return {
+    name:      get('نام', '—'),
+    age:       ageVal,
+    gender:    genderVal,
+    province:  get('استان'),
+    avatar:    avatarVal,
+    theme:     get('پوسته'),
+    source:    get('منبع ورود'),
+    totalTime: get('⏳ جمع زمان (ثانیه)'),
+    unanswered:get('❌ بی‌جواب', '0'),
+    speed:     get('📊 سرعت'),
+    risk:      get('🎯 Risk Score'),
+    profile:   get('profile'),
+    cohort:    get('👥 Cohort'),
+    answers,
+    scores,
+    date:      get('تاریخ و ساعت')
+  };
+}
   const scores=[];
   for(let i=1;i<=8;i++){const v=get(`س${i} امتیاز`);if(v!==''&&v!=null)scores.push({qId:i,score:parseFloat(v)||0});}
   let avatarVal='';
