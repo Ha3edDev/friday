@@ -906,7 +906,7 @@ tr:hover td{background:rgba(123,97,255,.04);}
 // ═══════════════════════════════════════════
 const API_APP = 'https://script.google.com/macros/s/AKfycbza2JeMqLyPi2qEe_dpQNFATN2T_yyUNpfITy3Lf66E8DZmSSXKefq1AhITXpzt30m_Zw/exec';
 const API_STATS = 'https://script.google.com/macros/s/AKfycbwLCQxFGF3TDZshRt9MBtaOUgvGxg0ua_-DYftDHCsmUAKMlco3sHy7a9ytDRzOaWuP/exec';
-const PIN = '5941';
+const PIN_HASH = 'c564c8d54a00a9eb71216838d498cfc86d4e06018608d91c1035e1689d100e2a';
 const OMDB_KEY  = '7470d23b';
 const TMDB_KEY  = '7f4da1835dba2e5e31784fdb9020915d';
 const TMDB_IMG  = 'https://image.tmdb.org/t/p/w342';
@@ -944,8 +944,10 @@ function showBlocked(s){pinBlocked=true;const errEl=document.getElementById('loc
 function pinPress(n){if(pinBlocked||pinStr.length>=4)return;pinStr+=n;updateDots();if(pinStr.length===4)setTimeout(checkPin,80);}
 function pinDel(){if(pinBlocked)return;pinStr=pinStr.slice(0,-1);updateDots();}
 function updateDots(){for(let i=0;i<4;i++)document.getElementById('pd'+i).classList.toggle('on',i<pinStr.length);}
-function checkPin(){
-  if(pinStr===PIN){clearLock();const ls=document.getElementById('lockScreen');ls.style.transition='opacity 0.6s';ls.style.opacity='0';setTimeout(()=>{ls.style.display='none';document.getElementById('app').style.display='flex';initApp();},600);}
+async function checkPin(){
+  const _h=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(pinStr));
+  const _hx=[...new Uint8Array(_h)].map(x=>x.toString(16).padStart(2,'0')).join('');
+  if(_hx===PIN_HASH){clearLock();const ls=document.getElementById('lockScreen');ls.style.transition='opacity 0.6s';ls.style.opacity='0';setTimeout(()=>{ls.style.display='none';document.getElementById('app').style.display='flex';initApp();},600);}
   else{pinAttempts++;document.querySelectorAll('.pin-dot').forEach(d=>{d.classList.add('err');setTimeout(()=>d.classList.remove('err'),400);});if(pinAttempts>=3){saveLock(true);showBlocked(3600);}else{saveLock(false);const e=document.getElementById('lockErr');e.classList.add('show');setTimeout(()=>e.classList.remove('show'),1800);}setTimeout(()=>{pinStr='';updateDots();},400);}
 }
 function lockApp(){document.getElementById('app').style.display='none';const ls=document.getElementById('lockScreen');ls.style.display='flex';ls.style.opacity='1';pinStr='';updateDots();}
