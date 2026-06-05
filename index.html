@@ -1309,23 +1309,18 @@ async function loadHome(){
   }
   const mEl=document.getElementById('homeMovies');
   if(movies&&movies.length){
-    mEl.innerHTML=movies.slice(0,12).map((m,i)=>`<div class="movie-mini"><div class="movie-mini-fb" id="hmp-${i}">🎬</div><div class="movie-mini-ov"><div class="movie-mini-title">${esc(m.title)}</div><div class="movie-mini-meta"><span class="movie-mini-rating" id="hmr-${i}">${m.rating?'★ '+m.rating:''}</span></div></div></div>`).join('');
+    mEl.innerHTML=movies.slice(0,12).map((m,i)=>`<div class="movie-mini"><div class="movie-mini-fb" id="hmp-${i}">🎬</div><div class="movie-mini-ov"><div class="movie-mini-title">${esc(m.title)}</div><div class="movie-mini-meta"><span class="movie-mini-rating" id="hmr-${i}"></span></div></div></div>`).join('');
     movies.slice(0,12).forEach(async(m,i)=>{
       const el=document.getElementById('hmp-'+i);if(!el)return;
-      if(m.tmdbId||m.tmdb_id){const tid=m.tmdbId||m.tmdb_id;const mt=m.mediaType||m.media_type||'movie';try{const r=await fetch(`https://api.themoviedb.org/3/${mt}/${tid}?api_key=${TMDB_KEY}&language=fa-IR`);const d=await r.json();if(d.poster_path){el.outerHTML=`<img class="movie-mini-img" src="${TMDB_IMG}${d.poster_path}" loading="lazy">`;return;}}catch(e){}}
-      if(m.imdbId||m.imdb_id){const iid=m.imdbId||m.imdb_id;try{const r=await fetch(`https://www.omdbapi.com/?i=${iid}&apikey=${OMDB_KEY}`);const d=await r.json();if(d.Poster&&d.Poster!=='N/A'){el.outerHTML=`<img class="movie-mini-img" src="${d.Poster}" loading="lazy">`;const rEl=document.getElementById('hmr-'+i);if(rEl&&d.imdbRating&&d.imdbRating!=='N/A')rEl.textContent='★ '+d.imdbRating;return;}}catch(e){}}
-      if(m.title){try{const r=await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&query=${encodeURIComponent(m.title)}&language=fa-IR`);const d=await r.json();if(d.results&&d.results.length&&d.results[0].poster_path){el.outerHTML=`<img class="movie-mini-img" src="${TMDB_IMG}${d.results[0].poster_path}" loading="lazy">`;}}catch(e){}}
+      if(m.tmdb_id){const mt=m.media_type||'movie';try{const r=await fetch(`https://api.themoviedb.org/3/${mt}/${m.tmdb_id}?api_key=${TMDB_KEY}`);const d=await r.json();if(d.poster_path){el.outerHTML=`<img class="movie-mini-img" src="${TMDB_IMG}${d.poster_path}" loading="lazy">`;}}catch(e){}}
     });
   }else mEl.innerHTML='<div class="empty">// فیلمی ثبت نشده</div>';
-
   const lEl=document.getElementById('homeLinks');
   if(links&&links.length)lEl.innerHTML=links.slice(0,10).map(l=>`<a class="link-mini" href="${l.url}" target="_blank" rel="noopener">${linkThumbMini(l)}<div class="link-mini-info"><div class="link-mini-name">${esc(l.name)}</div><div class="link-mini-domain">${getDomain(l.url)}</div></div></a>`).join('');
   else lEl.innerHTML='<div class="empty">// لینکی ثبت نشده</div>';
-
   const aEl=document.getElementById('homeArchive');
   if(archive&&archive.length)aEl.innerHTML=archive.slice(0,3).map(a=>`<div class="arch-mini" onclick="openModal('${escJs(a.title)}','${escJs(a.content)}')"><div class="arch-mini-title">${esc(a.title)}</div><div class="arch-mini-preview">${esc(a.content)}</div><div class="arch-mini-date">${a.date||''}</div></div>`).join('');
   else aEl.innerHTML='<div class="empty">// آرشیوی وجود ندارد</div>';
-
   const rEl=document.getElementById('homeRecent');
   if(full&&full.rows&&full.rows.length){rEl.innerHTML=buildRecent(full.rows.slice(-5).reverse().map(r=>parseRow(r)));}
   else if(stats&&stats.recent){rEl.innerHTML=buildRecent(stats.recent.slice(0,3));}
@@ -1340,15 +1335,12 @@ async function loadMovies(){
   const data=await apiFetch('watchlist_data');
   const el=document.getElementById('moviesWrap');
   if(!data||!data.length){el.innerHTML='<div class="empty">// لیست خالیه</div>';return;}
-  el.innerHTML=`<div class="movie-grid">${data.map((m,i)=>`<div class="mc"><div class="mc-fb" id="mp-${i}">🎬</div><div class="mc-ov"><div class="mc-title">${esc(m.title)}</div><div class="mc-meta"><span class="mc-rate" id="mr-${i}">${m.rating?'★ '+m.rating:''}</span></div></div></div>`).join('')}</div>`;
+  el.innerHTML=`<div class="movie-grid">${data.map((m,i)=>`<div class="mc"><div class="mc-fb" id="mp-${i}">🎬</div><div class="mc-ov"><div class="mc-title">${esc(m.title)}</div><div class="mc-meta"><span class="mc-rate" id="mr-${i}"></span></div></div></div>`).join('')}</div>`;
   data.forEach(async(m,i)=>{
     const el=document.getElementById('mp-'+i);if(!el)return;
-    if(m.tmdbId||m.tmdb_id){const tid=m.tmdbId||m.tmdb_id;const mt=m.mediaType||m.media_type||'movie';try{const r=await fetch(`https://api.themoviedb.org/3/${mt}/${tid}?api_key=${TMDB_KEY}&language=fa-IR`);const d=await r.json();if(d.poster_path){el.outerHTML=`<img class="mc-poster" src="${TMDB_IMG}${d.poster_path}" loading="lazy">`;return;}}catch(e){}}
-    if(m.imdbId||m.imdb_id){const iid=m.imdbId||m.imdb_id;try{const r=await fetch(`https://www.omdbapi.com/?i=${iid}&apikey=${OMDB_KEY}`);const d=await r.json();if(d.Poster&&d.Poster!=='N/A'){el.outerHTML=`<img class="mc-poster" src="${d.Poster}" loading="lazy">`;const rEl=document.getElementById('mr-'+i);if(rEl&&d.imdbRating&&d.imdbRating!=='N/A')rEl.textContent='★ '+d.imdbRating;return;}}catch(e){}}
-    if(m.title){try{const r=await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${TMDB_KEY}&query=${encodeURIComponent(m.title)}&language=fa-IR`);const d=await r.json();if(d.results&&d.results.length&&d.results[0].poster_path){el.outerHTML=`<img class="mc-poster" src="${TMDB_IMG}${d.results[0].poster_path}" loading="lazy">`;}}catch(e){}}
+    if(m.tmdb_id){const mt=m.media_type||'movie';try{const r=await fetch(`https://api.themoviedb.org/3/${mt}/${m.tmdb_id}?api_key=${TMDB_KEY}`);const d=await r.json();if(d.poster_path){el.outerHTML=`<img class="mc-poster" src="${TMDB_IMG}${d.poster_path}" loading="lazy">`;}}}catch(e){}
   });
 }
-
 // ═══════════════════════════════════════════
 // LINKS
 // ═══════════════════════════════════════════
