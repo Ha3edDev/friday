@@ -1016,14 +1016,22 @@ const AV_DATA={
   "جسور":{hair:"#CC0000",shirt:"#FF6B00",pants:"#CC4400",skin:"#FDDBB4"}
 };
 const AV_PX=["  hhhh  "," hssssh "," hssssh ","  bbbb  "," bbbbbb "," bbbbbb "," pp  pp "," pp  pp "];
-function makeAvatar(name,size=40){
-  const c=AV_DATA[name];if(!c)return null;
-  const cv=document.createElement('canvas');cv.width=size;cv.height=size;
-  const ctx=cv.getContext('2d');ctx.imageSmoothingEnabled=false;
-  const map={s:c.skin,h:c.hair,b:c.shirt,p:c.pants};
-  const cw=size/8,ch=size/AV_PX.length;
-  AV_PX.forEach((row,ri)=>{for(let ci=0;ci<8;ci++){const col=map[row[ci]];if(!col)return;ctx.fillStyle=col;ctx.fillRect(ci*cw,ri*ch,cw,ch);}});
-  return cv.toDataURL();
+function makeAvatar(name, size=40) {
+  const c = AV_DATA[name];
+  if (!c) return null;
+  const cw = size / 8;
+  const ch = size / 8;
+  const map = {s:c.skin, h:c.hair, b:c.shirt, p:c.pants};
+  let rects = '';
+  AV_PX.forEach((row, ri) => {
+    for (let ci = 0; ci < 8; ci++) {
+      const col = map[row[ci]];
+      if (!col) continue;
+      rects += `<rect x="${ci*cw}" y="${ri*ch}" width="${cw}" height="${ch}" fill="${col}"/>`;
+    }
+  });
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" shape-rendering="crispEdges">${rects}</svg>`;
+  return 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg)));
 }
 
 /* ═══════════════ PERSON MODAL ═══════════════ */
