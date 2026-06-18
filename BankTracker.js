@@ -98,10 +98,7 @@ function _btEsc(s){
 function _btFmtShort(n){
   const v=Number(n||0);
   if(!v) return '—';
-  if(v>=1e9)  return (v/1e9).toFixed(1)+'B';
-  if(v>=1e6)  return (v/1e6).toFixed(1)+'M';
-  if(v>=1000) return (v/1000).toFixed(0)+'K';
-  return String(v);
+  return v.toLocaleString('fa-IR');
 }
 function _btFmtFull(n){
   return Number(n||0).toLocaleString('fa-IR');
@@ -223,17 +220,17 @@ function _btRender(){
     <div class="bt-sb bt-in">
       <div class="bt-sb-lbl">واریز</div>
       <div class="bt-sb-val">${_btFmtShort(inSum)}</div>
-      <div class="bt-sb-unit">ریال</div>
+      <div class="bt-sb-unit">تومان</div>
     </div>
     <div class="bt-sb bt-out">
       <div class="bt-sb-lbl">برداشت</div>
       <div class="bt-sb-val">${_btFmtShort(outSum)}</div>
-      <div class="bt-sb-unit">ریال</div>
+      <div class="bt-sb-unit">تومان</div>
     </div>
     <div class="bt-sb bt-net">
       <div class="bt-sb-lbl">خالص</div>
       <div class="bt-sb-val ${net>=0?'pos':'neg'}">${net>=0?'+':'−'}${_btFmtShort(Math.abs(net))}</div>
-      <div class="bt-sb-unit">ریال</div>
+      <div class="bt-sb-unit">تومان</div>
     </div>
   </div>`;
 
@@ -258,7 +255,7 @@ function _btRender(){
       <div class="bt-tx-body">
         <div class="bt-tx-top">
           <span class="bt-tx-bank">🏦 ${_btEsc(tx.bank||'نامشخص')}</span>
-          <span class="bt-tx-amount">${isIn?'+':'−'}${_btFmtFull(tx.amount)} ﷼</span>
+          <span class="bt-tx-amount">${isIn?'+':'−'}${_btFmtFull(tx.amount)} تومان</span>
         </div>
         <div class="bt-tx-bottom">
           ${tx.card?`<span class="bt-chip card">****${_btEsc(tx.card)}</span>`:''}
