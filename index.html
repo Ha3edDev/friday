@@ -684,9 +684,20 @@ body{
     <button class="ni active" data-page="home" onclick="navTo(this)"><div class="ni-icon"><svg viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><span class="ni-lbl">HOME</span></button>
     <button class="ni" data-page="stats" onclick="navTo(this)"><div class="ni-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><span class="ni-lbl">STATS</span></button>
     <button class="ni" data-page="more" onclick="navTo(this)"><div class="ni-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div><span class="ni-lbl">MORE</span></button>
+<button class="ni" data-page="bank" onclick="navTo(this)">
+  <div class="ni-icon">
+    <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+  </div>
+  <span class="ni-lbl">BANK</span>
+</button>
   </nav>
 </div>
-
+<button class="ni" data-page="bank" onclick="navTo(this)">
+  <div class="ni-icon">
+    <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+  </div>
+  <span class="ni-lbl">BANK</span>
+</button>
 <!-- PERSON MODAL -->
 <div class="person-modal-bg" id="personModal" onclick="if(event.target===this)closePersonModal()">
   <div class="person-sheet" id="personSheet">
@@ -954,8 +965,7 @@ const loadedPages={home:false};
 function navTo(btn){const p=btn.dataset.page;if(p===curPage)return;haptic(8);document.querySelectorAll('.ni').forEach(b=>b.classList.remove('active'));btn.classList.add('active');updateNavIndicator();document.querySelectorAll('.page').forEach(pg=>pg.classList.remove('active'));document.getElementById('page-'+p).classList.add('active');document.getElementById('pages').scrollTop=0;curPage=p;if(!loadedPages[p]){loadPage(p);loadedPages[p]=true;}}
 function navToByPage(p){const btn=document.querySelector(`.ni[data-page="${p}"]`);if(btn)navTo(btn);}
 function openMoreSub(which){haptic(8);document.querySelectorAll('.page').forEach(pg=>pg.classList.remove('active'));document.getElementById('page-'+which).classList.add('active');curPage=which;document.getElementById('pages').scrollTop=0;if(!loadedPages[which]){loadPage(which);loadedPages[which]=true;}document.querySelectorAll('.ni').forEach(b=>b.classList.toggle('active',b.dataset.page==='more'));updateNavIndicator();}
-function loadPage(p){if(p==='home')loadHome();else if(p==='movies')loadMovies();else if(p==='links')loadLinks();else if(p==='stats')loadStats();else if(p==='archive')loadArchive();else if(p==='pass')loadPasswords();}
-
+function loadPage(p){if(p==='home')loadHome();else if(p==='movies')loadMovies();else if(p==='links')loadLinks();else if(p==='stats')loadStats();else if(p==='archive')loadArchive();else if(p==='pass')loadPasswords();else if(p==='bank')BT_load();}
 /* ══════════ CLOCK ══════════ */
 function updateClock(){const now=new Date();document.getElementById('hClock').textContent=now.toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Asia/Tehran'});document.getElementById('hDate').textContent=now.toLocaleDateString('fa-IR',{weekday:'short',month:'long',day:'numeric',timeZone:'Asia/Tehran'});}
 
@@ -1141,5 +1151,6 @@ function copyText(t){haptic(15);navigator.clipboard?.writeText(t).then(()=>showT
 <script src="Movies.js"></script>
 <script src="Links.js"></script>
 <script src="Stats.js"></script>
+<script src="BankTracker.js"></script>
 </body>
 </html>
