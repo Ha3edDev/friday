@@ -4,7 +4,7 @@
 // ============================================================================
 
 /* ══════════ CONFIG ══════════ */
-const BT_API = 'https://script.google.com/macros/s/AKfycbza2JeMqLyPi2qEe_dpQNFATN2T_yyUNpfITy3Lf66E8DZmSSXKefq1AhITXpzt30m_Zw/exec';
+const BT_API = 'https://script.google.com/macros/s/AKfycbw1p_G2IUuPX0Nkajj6sWoiZb9xac8WLou0MhW6RvvPGM42fZ2yCtkasdFMWmeekOzIgQ/exec';
 
 /* ══════════ STATE ══════════ */
 let _btTx          = [];
