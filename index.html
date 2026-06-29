@@ -1000,7 +1000,7 @@ const WX_LAT=32.045, WX_LON=48.857;
 /* ══════════════════════════════════════════
    ANIMATED BACKGROUND ENGINE
 ══════════════════════════════════════════ */
-const BG = (() => {
+window.BG = (() => {
   let canvas, ctx, W, H, raf, particles = [], style = 'particles';
   let c1='rgba(176,125,58,.12)', c2='rgba(74,140,106,.08)', c3='rgba(192,82,42,.06)';
 
@@ -1451,7 +1451,7 @@ function loadTheme(){
   document.body.setAttribute('data-theme',t);
 }
 function openTheme(){
-  // ThemeUpgrade.js این تابع رو override می‌کنه
+  if(typeof TU_buildGrid === 'function') TU_buildGrid();
   document.getElementById('themeSheet').classList.add('open');
 }
 function closeTheme(){document.getElementById('themeSheet').classList.remove('open');}
