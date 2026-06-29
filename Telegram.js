@@ -3,7 +3,7 @@
    کپسول کانال‌های تلگرام
 ══════════════════════════════════════════ */
 
-const TG_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE'; // ← توکن bot خودت رو اینجا بذار
+const TG_BOT_TOKEN = '8277656739:AAFZmqzMFo2k0mK5aU8jDkGZ8eVAzA0Lh0g'; // ← توکن bot خودت رو اینجا بذار
 const TG_CHANNELS = [
   { username: 'MeyarAnalytics', label: 'معیار آنالیتیکس' },
   { username: 'FridayOS',       label: 'Friday OS' },
