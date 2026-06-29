@@ -1451,9 +1451,10 @@ function loadTheme(){
   document.body.setAttribute('data-theme',t);
 }
 function openTheme(){
-  if(typeof TU_buildGrid === 'function') TU_buildGrid();
+  // ThemeUpgrade.js این تابع رو override می‌کنه
   document.getElementById('themeSheet').classList.add('open');
 }
+function closeTheme(){document.getElementById('themeSheet').classList.remove('open');}
 loadTheme();
 
 /* ══════════════════════════════════════════
