@@ -414,7 +414,7 @@ body{
 .hstat-sub{font-size:7px;color:var(--text2);margin-top:3px;}
 
 /* ══════════════════════════════════════════
-   PULSE FEED — بخش جدید
+   PULSE FEED
 ══════════════════════════════════════════ */
 .pulse-feed{display:flex;flex-direction:column;gap:5px;margin-bottom:4px;}
 .pulse-item{
@@ -440,7 +440,7 @@ body{
 .pi-loading{opacity:.5;animation:skShim 1.5s ease-in-out infinite;}
 
 /* ══════════════════════════════════════════
-   DECISION LOG — بخش جدید
+   DECISION LOG
 ══════════════════════════════════════════ */
 .dl-wrap{display:flex;flex-direction:column;gap:6px;}
 .dl-card{
@@ -462,7 +462,6 @@ body{
 .dl-outcome.good{background:rgba(52,180,100,.1);color:#2a9060;border:1px solid rgba(52,180,100,.2);}
 .dl-outcome.bad{background:rgba(200,60,60,.1);color:#c04040;border:1px solid rgba(200,60,60,.2);}
 .dl-outcome.pending{background:rgba(200,160,40,.1);color:#a08020;border:1px solid rgba(200,160,40,.2);}
-/* add button */
 .dl-add{
   display:flex;align-items:center;justify-content:center;gap:7px;
   padding:11px;border-radius:14px;
@@ -499,7 +498,6 @@ body{
 .dl-save-btn{width:100%;padding:13px;background:var(--accent);border:none;border-radius:13px;color:var(--bg0);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;cursor:pointer;transition:all .2s;margin-top:4px;}
 .dl-save-btn:hover{opacity:.88;}
 .dl-save-btn:active{transform:scale(.97);}
-/* detail view */
 .dl-detail-body{padding:14px 16px;}
 .dl-detail-decision{font-size:14px;font-weight:700;color:var(--text1);margin-bottom:10px;}
 .dl-detail-section{margin-bottom:12px;}
@@ -688,7 +686,7 @@ body{
 .pm-q-cmt{font-size:8.5px;color:var(--text2);margin-top:4px;font-style:italic;border-right:2px solid var(--border);padding-right:7px;}
 
 /* ══════════════════════════════════════════
-   ARCHIVE / THEME / SEARCH MODALS
+   ARCHIVE / THEME-SHEET (shell only — ThemeUpgrade.js fills it)
 ══════════════════════════════════════════ */
 .modal-bg{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .22s;}
 .modal-bg.open{opacity:1;pointer-events:all;}
@@ -697,21 +695,18 @@ body{
 .modal-handle{width:30px;height:3px;background:var(--border2);border-radius:2px;margin:0 auto 12px;}
 .modal-title{font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:var(--text1);margin-bottom:9px;}
 .modal-body{font-size:11.5px;color:var(--text2);line-height:1.9;white-space:pre-wrap;}
+/* theme sheet shell */
 .theme-sheet{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.55);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .22s;}
 .theme-sheet.open{opacity:1;pointer-events:all;}
-.theme-inner{width:100%;background:var(--glass);border:1px solid var(--glass-b);border-radius:22px 22px 0 0;padding:13px 16px 60px;max-height:80vh;overflow-y:auto;transform:translateY(100px);transition:transform .32s cubic-bezier(.34,1.56,.64,1);}
+.theme-inner{width:100%;background:var(--glass);border:1px solid var(--glass-b);border-radius:22px 22px 0 0;padding:13px 16px 80px;max-height:80vh;overflow-y:auto;transform:translateY(100px);transition:transform .32s cubic-bezier(.34,1.56,.64,1);}
 .theme-sheet.open .theme-inner{transform:translateY(0);}
 .theme-inner::-webkit-scrollbar{display:none;}
 .theme-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
 .theme-title{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--text1);}
-.theme-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
-.tbtn{border-radius:14px;padding:10px 4px 8px;border:2px solid transparent;cursor:pointer;text-align:center;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--card);}
-.tbtn.active{border-color:var(--accent);}
-.tbtn:active{transform:scale(.9);}
-.tprev{width:100%;height:32px;border-radius:8px;border:1px solid rgba(0,0,0,.06);overflow:hidden;position:relative;}
-.tprev-bar{height:3px;}
-.tprev-mid{height:calc(100% - 3px);display:flex;align-items:center;justify-content:center;font-size:14px;}
-.tname{font-size:6px;color:var(--text2);font-weight:600;font-family:'JetBrains Mono',monospace;letter-spacing:.5px;}
+
+/* ══════════════════════════════════════════
+   GLOBAL SEARCH OVERLAY
+══════════════════════════════════════════ */
 .srch-ov{position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:flex;flex-direction:column;opacity:0;pointer-events:none;transition:opacity .2s;}
 .srch-ov.open{opacity:1;pointer-events:all;}
 .srch-box{margin:50px 14px 0;background:var(--glass);border:1px solid var(--border2);border-radius:18px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.15);}
@@ -731,7 +726,7 @@ body{
 .srch-empty{text-align:center;padding:22px;color:var(--text3);font-family:'JetBrains Mono',monospace;font-size:8.5px;}
 
 /* ══════════════════════════════════════════
-   WORLD CLOCK (fallback — WorldClock.js overrides)
+   WORLD CLOCK
 ══════════════════════════════════════════ */
 .clock-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .clock-card{border-radius:16px;padding:14px 12px;background:var(--card);border:1px solid var(--card-b);text-align:center;box-shadow:0 1px 6px rgba(0,0,0,.04);}
@@ -821,15 +816,12 @@ body{
 
     <!-- HOME -->
     <div class="page active" id="page-home">
-      <!-- BRIEFING -->
       <div class="briefing-wrap" id="briefingWrap">
         <div class="briefing-loading" id="briefingLoading">
           <div class="bf-spin"></div>
           <div class="bf-spin-txt">// دریافت اطلاعات...</div>
         </div>
       </div>
-
-      <!-- STATS ROW -->
       <div class="home-stats-row" id="homeStatsRow" style="display:none">
         <div class="hstat" onclick="navToByPage('stats')">
           <div class="hstat-lbl">TOTAL</div>
@@ -847,40 +839,26 @@ body{
           <div class="hstat-sub">فیلم</div>
         </div>
       </div>
-
-      <!-- PULSE FEED — بخش جدید -->
       <div class="sec">پالس بازار</div>
       <div class="pulse-feed" id="pulseFeed">
         <div class="pulse-item pi-loading"><div class="pi-icon">⏳</div><div class="pi-body"><div class="pi-title">در حال بارگذاری...</div></div></div>
       </div>
-
-      <!-- DECISION LOG — بخش جدید -->
       <div class="sec">ثبت تصمیم</div>
       <div class="dl-wrap" id="dlWrap">
         <div class="dl-add" onclick="DL_openAdd()">＋ ثبت تصمیم جدید</div>
       </div>
-
-      <!-- MOVIES -->
       <div class="sec">آخرین فیلم‌ها</div>
       <div class="h-scroll" id="homeMovies">
         <div class="sk sk-sq"></div><div class="sk sk-sq"></div><div class="sk sk-sq"></div>
       </div>
-
-      <!-- BANK -->
       <div class="sec">کارت بانک</div>
       <div id="homeBankPreview"></div>
-
-      <!-- LINKS -->
       <div class="sec">آخرین لینک‌ها</div>
       <div class="h-scroll" id="homeLinks">
         <div class="sk sk-wide"></div><div class="sk sk-wide"></div>
       </div>
-
-      <!-- ARCHIVE -->
       <div class="sec">آرشیو اخیر</div>
       <div id="homeArchive"><div class="sk sk-h"></div><div class="sk sk-h"></div></div>
-
-      <!-- RECENT -->
       <div class="sec">آخرین ثبت‌ها</div>
       <div id="homeRecent"><div class="sk sk-h"></div><div class="sk sk-h"></div></div>
     </div>
@@ -973,37 +951,14 @@ body{
     <div class="modal-body" id="modalBody"></div>
   </div>
 </div>
+
+<!-- THEME SHEET — ThemeUpgrade.js fills .theme-inner -->
 <div class="theme-sheet" id="themeSheet" onclick="if(event.target===this)closeTheme()">
-  <div class="theme-inner">
-    <div class="modal-handle"></div>
-    <div class="theme-top">
-      <div class="theme-title">تم — ۱۶ حالت</div>
-      <div style="font-family:'JetBrains Mono',monospace;font-size:7px;color:var(--text3);cursor:pointer" onclick="closeTheme()">✕ بستن</div>
-    </div>
-    <div style="font-family:'JetBrains Mono',monospace;font-size:6.5px;color:var(--text3);letter-spacing:1px;margin-bottom:10px;">// روشن</div>
-    <div class="theme-grid" style="margin-bottom:12px">
-      <button class="tbtn active" data-t="sand"     onclick="setTheme('sand',this)"><div class="tprev" style="background:#faf7f2"><div class="tprev-bar" style="background:linear-gradient(90deg,#b07d3a,#7c5c2a,#4a8c6a)"></div><div class="tprev-mid">☀️</div></div><span class="tname">SAND</span></button>
-      <button class="tbtn" data-t="rose"     onclick="setTheme('rose',this)"><div class="tprev" style="background:#fdf5f5"><div class="tprev-bar" style="background:linear-gradient(90deg,#c0504a,#8a3060,#4a8c6a)"></div><div class="tprev-mid">🌸</div></div><span class="tname">ROSE</span></button>
-      <button class="tbtn" data-t="arctic"   onclick="setTheme('arctic',this)"><div class="tprev" style="background:#f4f8fc"><div class="tprev-bar" style="background:linear-gradient(90deg,#2470b8,#5040a0,#2a9060)"></div><div class="tprev-mid">🧊</div></div><span class="tname">ARCTIC</span></button>
-      <button class="tbtn" data-t="sage"     onclick="setTheme('sage',this)"><div class="tprev" style="background:#f3f7f3"><div class="tprev-bar" style="background:linear-gradient(90deg,#3a7a3a,#606020,#2a6090)"></div><div class="tprev-mid">🌿</div></div><span class="tname">SAGE</span></button>
-      <button class="tbtn" data-t="lavender" onclick="setTheme('lavender',this)"><div class="tprev" style="background:#f7f4fc"><div class="tprev-bar" style="background:linear-gradient(90deg,#6a3ab0,#b040a0,#2a8060)"></div><div class="tprev-mid">💜</div></div><span class="tname">LAVENDER</span></button>
-      <button class="tbtn" data-t="paper"    onclick="setTheme('paper',this)"><div class="tprev" style="background:#fefefe;border:1px solid #eee"><div class="tprev-bar" style="background:linear-gradient(90deg,#222,#555,#2a7a4a)"></div><div class="tprev-mid">📄</div></div><span class="tname" style="color:#555">PAPER</span></button>
-    </div>
-    <div style="font-family:'JetBrains Mono',monospace;font-size:6.5px;color:var(--text3);letter-spacing:1px;margin-bottom:10px;">// تیره</div>
-    <div class="theme-grid">
-      <button class="tbtn" data-t="midnight" onclick="setTheme('midnight',this)"><div class="tprev" style="background:#0a0e1a"><div class="tprev-bar" style="background:linear-gradient(90deg,#5090e0,#9060e0,#30c080)"></div><div class="tprev-mid">🌙</div></div><span class="tname" style="color:#6080c0">MIDNIGHT</span></button>
-      <button class="tbtn" data-t="carbon"   onclick="setTheme('carbon',this)"><div class="tprev" style="background:#111"><div class="tprev-bar" style="background:linear-gradient(90deg,#d0d0d0,#a0a0a0,#60c070)"></div><div class="tprev-mid">🖤</div></div><span class="tname" style="color:#888">CARBON</span></button>
-      <button class="tbtn" data-t="forest"   onclick="setTheme('forest',this)"><div class="tprev" style="background:#0d1a0f"><div class="tprev-bar" style="background:linear-gradient(90deg,#4ac870,#a0d840,#60b8c0)"></div><div class="tprev-mid">🌲</div></div><span class="tname" style="color:#4ac870">FOREST</span></button>
-      <button class="tbtn" data-t="sunset"   onclick="setTheme('sunset',this)"><div class="tprev" style="background:#1a0e06"><div class="tprev-bar" style="background:linear-gradient(90deg,#f07030,#e04080,#f0b030)"></div><div class="tprev-mid">🌅</div></div><span class="tname" style="color:#f07030">SUNSET</span></button>
-      <button class="tbtn" data-t="ocean"    onclick="setTheme('ocean',this)"><div class="tprev" style="background:#030e1a"><div class="tprev-bar" style="background:linear-gradient(90deg,#00b4e0,#0060c0,#00d4a0)"></div><div class="tprev-mid">🌊</div></div><span class="tname" style="color:#00b4e0">OCEAN</span></button>
-      <button class="tbtn" data-t="neon"     onclick="setTheme('neon',this)"><div class="tprev" style="background:#060010"><div class="tprev-bar" style="background:linear-gradient(90deg,#c000ff,#00e8ff,#ff0080)"></div><div class="tprev-mid">⚡</div></div><span class="tname" style="color:#c000ff">NEON</span></button>
-      <button class="tbtn" data-t="copper"   onclick="setTheme('copper',this)"><div class="tprev" style="background:#110a04"><div class="tprev-bar" style="background:linear-gradient(90deg,#c88030,#e0a040,#60c080)"></div><div class="tprev-mid">🟤</div></div><span class="tname" style="color:#c88030">COPPER</span></button>
-      <button class="tbtn" data-t="slate"    onclick="setTheme('slate',this)"><div class="tprev" style="background:#0e1218"><div class="tprev-bar" style="background:linear-gradient(90deg,#6898d8,#9890d0,#48c8a8)"></div><div class="tprev-mid">🩶</div></div><span class="tname" style="color:#6898d8">SLATE</span></button>
-      <button class="tbtn" data-t="crimson"  onclick="setTheme('crimson',this)"><div class="tprev" style="background:#120008"><div class="tprev-bar" style="background:linear-gradient(90deg,#e0205a,#ff6090,#60d0c0)"></div><div class="tprev-mid">🩸</div></div><span class="tname" style="color:#e0205a">CRIMSON</span></button>
-      <button class="tbtn" data-t="aurora"   onclick="setTheme('aurora',this)"><div class="tprev" style="background:#04080e"><div class="tprev-bar" style="background:linear-gradient(90deg,#00e8c0,#8040ff,#ff4080)"></div><div class="tprev-mid">🌌</div></div><span class="tname" style="color:#00e8c0">AURORA</span></button>
-    </div>
+  <div class="theme-inner" id="themeInner">
+    <!-- built by ThemeUpgrade.js -->
   </div>
 </div>
+
 <div class="srch-ov" id="srchOv" onclick="if(event.target===this)closeSearch()">
   <div class="srch-box">
     <div class="srch-irow">
@@ -1090,7 +1045,6 @@ const BG = (() => {
     };
   }
 
-  /* ── PARTICLES ── */
   function drawParticles(t) {
     ctx.clearRect(0,0,W,H);
     particles.forEach((p,i) => {
@@ -1100,18 +1054,15 @@ const BG = (() => {
       if (p.x < -20 || p.x > W+20 || p.y < -20 || p.y > H+20) {
         particles[i] = newParticle(false);
       }
-      // glow
       const g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*4);
       g.addColorStop(0, p.col.replace(/[\d.]+\)$/,`${op})`));
       g.addColorStop(1, p.col.replace(/[\d.]+\)$/,'0)'));
       ctx.beginPath(); ctx.arc(p.x,p.y,p.r*4,0,Math.PI*2);
       ctx.fillStyle = g; ctx.fill();
-      // dot
       ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
       ctx.fillStyle = p.col.replace(/[\d.]+\)$/,`${Math.min(op*2,.6)})`);
       ctx.fill();
     });
-    // subtle connecting lines
     for (let i=0;i<particles.length;i++) {
       for (let j=i+1;j<particles.length;j++) {
         const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
@@ -1127,7 +1078,6 @@ const BG = (() => {
     }
   }
 
-  /* ── GRID ── */
   function drawGrid(t) {
     ctx.clearRect(0,0,W,H);
     const gs=32, pulse=Math.sin(t*.0006)*.3+.7;
@@ -1135,20 +1085,17 @@ const BG = (() => {
     ctx.lineWidth=.5;
     for (let x=0;x<=W;x+=gs){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
     for (let y=0;y<=H;y+=gs){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
-    // dots at intersections
     for (let x=0;x<=W;x+=gs*2) for (let y=0;y<=H;y+=gs*2) {
       const d=Math.sin(x*.02+t*.001)*Math.sin(y*.02+t*.0008);
       ctx.beginPath();ctx.arc(x,y,1,0,Math.PI*2);
       ctx.fillStyle=c1.replace(/[\d.]+\)$/,`${Math.max(0,.08+d*.08)})`);ctx.fill();
     }
-    // scan line
     const sl=(t*.05)%H;
     const sg=ctx.createLinearGradient(0,sl-30,0,sl+30);
     sg.addColorStop(0,'transparent');sg.addColorStop(.5,c2.replace(/[\d.]+\)$/,'.06)'));sg.addColorStop(1,'transparent');
     ctx.fillStyle=sg;ctx.fillRect(0,sl-30,W,60);
   }
 
-  /* ── STARS ── */
   function drawStars(t) {
     ctx.clearRect(0,0,W,H);
     if (!particles._stars) {
@@ -1166,7 +1113,6 @@ const BG = (() => {
       ctx.fillStyle=s.col.replace(/[\d.]+\)$/,`${op})`);ctx.fill();
       if(Math.random()<.0003){s.x=Math.random()*W;s.y=Math.random()*H;}
     });
-    // occasional shooting star
     if(Math.random()<.003){
       const sx=Math.random()*W,sy=Math.random()*H*.5;
       const sg=ctx.createLinearGradient(sx,sy,sx+80,sy+40);
@@ -1176,7 +1122,6 @@ const BG = (() => {
     }
   }
 
-  /* ── PETALS ── */
   function drawPetals(t) {
     ctx.clearRect(0,0,W,H);
     if (!particles._petals) {
@@ -1198,7 +1143,6 @@ const BG = (() => {
     });
   }
 
-  /* ── WAVES ── */
   function drawWaves(t) {
     ctx.clearRect(0,0,W,H);
     [c1,c2,c3].forEach((col,i)=>{
@@ -1213,7 +1157,6 @@ const BG = (() => {
     });
   }
 
-  /* ── AURORA ── */
   function drawAurora(t) {
     ctx.clearRect(0,0,W,H);
     const colors=[c1,c2,c3];
@@ -1229,7 +1172,6 @@ const BG = (() => {
       ctx.fillStyle=g;
       ctx.fillRect(0,0,W,H);
     }
-    // horizontal shimmer
     for(let band=0;band<4;band++){
       const y=H*(.15+band*.2)+H*.05*Math.sin(t*.0007+band*2);
       const bg=ctx.createLinearGradient(0,y-30,0,y+30);
@@ -1240,7 +1182,6 @@ const BG = (() => {
     }
   }
 
-  /* ── NEON ── */
   function drawNeon(t) {
     ctx.clearRect(0,0,W,H);
     const lines=[
@@ -1277,7 +1218,7 @@ const BG = (() => {
 })();
 
 /* ══════════════════════════════════════════
-   LOCK SCREEN BG (mini version)
+   LOCK SCREEN BG
 ══════════════════════════════════════════ */
 (function initLockBg(){
   const cvs=document.getElementById('lockBgCanvas');
@@ -1300,7 +1241,7 @@ const BG = (() => {
 })();
 
 /* ══════════════════════════════════════════
-   THEME → BG COLOR MAPPING
+   THEME → BG COLOR MAPPING  (used by ThemeUpgrade.js + BG engine)
 ══════════════════════════════════════════ */
 const THEME_BG_MAP = {
   sand:     {style:'particles', colors:['rgba(176,125,58,.12)','rgba(74,140,106,.09)','rgba(192,82,42,.08)']},
@@ -1339,7 +1280,7 @@ async function apiStatsFetch(ep){
    MARKET / WEATHER
 ══════════════════════════════════════════ */
 async function fetchMarketData(){
-  let btc=0,usdtToman=0,btcChange=0,gold=0;
+  let btc=0,usdtToman=0,btcChange=0;
   try{const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true',{signal:AbortSignal.timeout(5000)});const d=await r.json();btc=d.bitcoin?.usd||0;btcChange=d.bitcoin?.usd_24h_change||0;}catch(e){}
   try{const r=await fetch('https://api.tgju.org/v1/market/indicator/summary-table-data/price_dollar_rl',{signal:AbortSignal.timeout(5000)});const d=await r.json();if(d?.data?.[0]){const raw=parseFloat(String(d.data[0].p||d.data[0][2]||0).replace(/,/g,''));usdtToman=raw>0?raw/10:0;}}catch(e){}
   if(!usdtToman){try{const r=await fetch('https://api.bitpin.ir/v1/mkt/markets/',{signal:AbortSignal.timeout(5000)});const d=await r.json();const pair=d.results?.find(x=>x.code==='USDT_IRT');if(pair)usdtToman=parseFloat(pair.price);}catch(e){}}
@@ -1360,16 +1301,9 @@ async function loadPulseFeed(){
   const fmt=n=>n>0?Number(Math.round(n)).toLocaleString('en-US'):'—';
   const fmtK=n=>n>0?`$${(n/1000).toFixed(1)}k`:'—';
   const items=[];
-  if(weather){
-    items.push({icon:weather.icon,title:`${weather.temp}°C · ${weather.desc}`,sub:'آب‌وهوا · شوشتر',val:'',change:'',color:'#60b0e0'});
-  }
-  if(market.btc>0){
-    const up=market.btcChange>0;
-    items.push({icon:'₿',title:'Bitcoin',sub:'BTC · USD',val:fmtK(market.btc),change:(up?'▲ +':'▼ ')+Math.abs(market.btcChange).toFixed(2)+'%',changeUp:up,color:'#f0a030'});
-  }
-  if(market.usdtToman>0){
-    items.push({icon:'💵',title:'تتر / تومان',sub:'USDT · IRT',val:fmt(market.usdtToman),change:'',color:'#60c080'});
-  }
+  if(weather){items.push({icon:weather.icon,title:`${weather.temp}°C · ${weather.desc}`,sub:'آب‌وهوا · شوشتر',val:'',change:'',color:'#60b0e0'});}
+  if(market.btc>0){const up=market.btcChange>0;items.push({icon:'₿',title:'Bitcoin',sub:'BTC · USD',val:fmtK(market.btc),change:(up?'▲ +':'▼ ')+Math.abs(market.btcChange).toFixed(2)+'%',changeUp:up,color:'#f0a030'});}
+  if(market.usdtToman>0){items.push({icon:'💵',title:'تتر / تومان',sub:'USDT · IRT',val:fmt(market.usdtToman),change:'',color:'#60c080'});}
   if(!items.length){el.innerHTML='<div class="empty">// داده‌ای دریافت نشد</div>';return;}
   el.innerHTML=items.map((it,i)=>`
     <div class="pulse-item stagger-item" style="--pi-color:${it.color};animation-delay:${i*.06}s">
@@ -1378,10 +1312,7 @@ async function loadPulseFeed(){
         <div class="pi-title">${esc(it.title)}</div>
         <div class="pi-sub">${esc(it.sub)}</div>
       </div>
-      ${it.val?`<div class="pi-right">
-        <div class="pi-val">${esc(it.val)}</div>
-        ${it.change?`<div class="pi-change ${it.changeUp?'up':'dn'}">${esc(it.change)}</div>`:''}
-      </div>`:''}
+      ${it.val?`<div class="pi-right"><div class="pi-val">${esc(it.val)}</div>${it.change?`<div class="pi-change ${it.changeUp?'up':'dn'}">${esc(it.change)}</div>`:''}</div>`:''}
     </div>`).join('');
 }
 
@@ -1392,43 +1323,23 @@ const DL_COLORS=['#5090e0','#c04a4a','#4ac870','#f0a030','#9060e0','#00c0a0','#e
 let DL_decisions=[];
 const DL_STORAGE_KEY='fri_decisions_v1';
 
-function DL_load(){
-  try{DL_decisions=JSON.parse(localStorage.getItem(DL_STORAGE_KEY)||'[]');}catch(e){DL_decisions=[];}
-  DL_render();
-}
+function DL_load(){try{DL_decisions=JSON.parse(localStorage.getItem(DL_STORAGE_KEY)||'[]');}catch(e){DL_decisions=[];}DL_render();}
 function DL_save(){try{localStorage.setItem(DL_STORAGE_KEY,JSON.stringify(DL_decisions));}catch(e){}}
 function DL_render(){
   const wrap=document.getElementById('dlWrap');
   let html='<div class="dl-add" onclick="DL_openAdd()">＋ ثبت تصمیم جدید</div>';
-  if(DL_decisions.length){
-    html+=DL_decisions.slice().reverse().slice(0,3).map((d,i)=>`
-      <div class="dl-card stagger-item" style="animation-delay:${i*.07}s" onclick="DL_openDetail('${d.id}')">
-        <div class="dl-header">
-          <div class="dl-dot" style="background:${d.color||'#5090e0'}"></div>
-          <div class="dl-title">${esc(d.decision)}</div>
-          <div class="dl-date">${d.date||''}</div>
-        </div>
-        <div class="dl-body">
-          ${d.reason?`<div class="dl-reason">${esc(d.reason)}</div>`:''}
-          <div class="dl-tags">
-            ${d.outcome?`<span class="dl-outcome ${d.outcome==='good'?'good':d.outcome==='bad'?'bad':'pending'}">${d.outcome==='good'?'✓ درست':d.outcome==='bad'?'✗ اشتباه':'⏳ در انتظار'}</span>`:''}
-            ${(d.tags||[]).map(t=>`<span class="dl-tag">${esc(t)}</span>`).join('')}
-          </div>
-        </div>
-      </div>`).join('');
-  }
+  if(DL_decisions.length){html+=DL_decisions.slice().reverse().slice(0,3).map((d,i)=>`
+    <div class="dl-card stagger-item" style="animation-delay:${i*.07}s" onclick="DL_openDetail('${d.id}')">
+      <div class="dl-header"><div class="dl-dot" style="background:${d.color||'#5090e0'}"></div><div class="dl-title">${esc(d.decision)}</div><div class="dl-date">${d.date||''}</div></div>
+      <div class="dl-body">${d.reason?`<div class="dl-reason">${esc(d.reason)}</div>`:''}
+        <div class="dl-tags">${d.outcome?`<span class="dl-outcome ${d.outcome==='good'?'good':d.outcome==='bad'?'bad':'pending'}">${d.outcome==='good'?'✓ درست':d.outcome==='bad'?'✗ اشتباه':'⏳ در انتظار'}</span>`:''}${(d.tags||[]).map(t=>`<span class="dl-tag">${esc(t)}</span>`).join('')}</div>
+      </div>
+    </div>`).join('');}
   wrap.innerHTML=html;
 }
 
 let _dlEditId=null;
-function DL_openAdd(){
-  haptic(8);_dlEditId=null;
-  document.getElementById('dlSheetTitle').textContent='ثبت تصمیم';
-  document.getElementById('dlSheetContent').innerHTML=DL_buildForm();
-  document.getElementById('dlModal').classList.add('open');
-  document.getElementById('dlSheet').scrollTop=0;
-  DL_setColor(0);
-}
+function DL_openAdd(){haptic(8);_dlEditId=null;document.getElementById('dlSheetTitle').textContent='ثبت تصمیم';document.getElementById('dlSheetContent').innerHTML=DL_buildForm();document.getElementById('dlModal').classList.add('open');document.getElementById('dlSheet').scrollTop=0;DL_setColor(0);}
 function DL_buildForm(d={}){
   const colorBtns=DL_COLORS.map((c,i)=>`<div class="dl-color-btn${d.color===c||(!d.color&&i===0)?' active':''}" style="background:${c}" onclick="DL_setColor(${i})" data-ci="${i}"></div>`).join('');
   const outBtns=['good','bad','pending'].map(o=>`<button class="dl-out-btn${(d.outcome||'pending')===o?' active':''}" onclick="DL_setOutcome('${o}')" data-out="${o}">${o==='good'?'✓ درست':o==='bad'?'✗ اشتباه':'⏳ در انتظار'}</button>`).join('');
@@ -1443,14 +1354,8 @@ function DL_buildForm(d={}){
     <button class="dl-save-btn" onclick="DL_saveCurrent()">ذخیره ✓</button>
   </div>`;
 }
-function DL_setColor(i){
-  document.querySelectorAll('.dl-color-btn').forEach((b,j)=>b.classList.toggle('active',j===i));
-  const inp=document.getElementById('dl-color');if(inp)inp.value=DL_COLORS[i];
-}
-function DL_setOutcome(o){
-  document.querySelectorAll('.dl-out-btn').forEach(b=>b.classList.toggle('active',b.dataset.out===o));
-  const inp=document.getElementById('dl-outcome-val');if(inp)inp.value=o;
-}
+function DL_setColor(i){document.querySelectorAll('.dl-color-btn').forEach((b,j)=>b.classList.toggle('active',j===i));const inp=document.getElementById('dl-color');if(inp)inp.value=DL_COLORS[i];}
+function DL_setOutcome(o){document.querySelectorAll('.dl-out-btn').forEach(b=>b.classList.toggle('active',b.dataset.out===o));const inp=document.getElementById('dl-outcome-val');if(inp)inp.value=o;}
 function DL_saveCurrent(){
   haptic(12);
   const decision=(document.getElementById('dl-decision')?.value||'').trim();
@@ -1462,12 +1367,8 @@ function DL_saveCurrent(){
   const outcome=document.getElementById('dl-outcome-val')?.value||'pending';
   const now=new Date();
   const date=now.toLocaleDateString('fa-IR',{year:'numeric',month:'2-digit',day:'2-digit',timeZone:'Asia/Tehran'});
-  if(_dlEditId){
-    const idx=DL_decisions.findIndex(d=>d.id===_dlEditId);
-    if(idx>-1)DL_decisions[idx]={...DL_decisions[idx],decision,reason,tags,color,outcome};
-  }else{
-    DL_decisions.push({id:'d'+Date.now(),decision,reason,tags,color,outcome,date,ts:Date.now()});
-  }
+  if(_dlEditId){const idx=DL_decisions.findIndex(d=>d.id===_dlEditId);if(idx>-1)DL_decisions[idx]={...DL_decisions[idx],decision,reason,tags,color,outcome};}
+  else{DL_decisions.push({id:'d'+Date.now(),decision,reason,tags,color,outcome,date,ts:Date.now()});}
   DL_save();DL_render();DL_closeModal();showToast('✓ تصمیم ثبت شد');
 }
 function DL_openDetail(id){
@@ -1477,46 +1378,24 @@ function DL_openDetail(id){
   const outLbl=d.outcome==='good'?'<span class="dl-outcome good">✓ درست بود</span>':d.outcome==='bad'?'<span class="dl-outcome bad">✗ اشتباه بود</span>':'<span class="dl-outcome pending">⏳ در انتظار</span>';
   document.getElementById('dlSheetContent').innerHTML=`
     <div class="dl-detail-body">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
-        <div style="width:10px;height:10px;border-radius:50%;background:${d.color||'#5090e0'}"></div>
-        <div class="dl-detail-decision">${esc(d.decision)}</div>
-      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px"><div style="width:10px;height:10px;border-radius:50%;background:${d.color||'#5090e0'}"></div><div class="dl-detail-decision">${esc(d.decision)}</div></div>
       ${d.reason?`<div class="dl-detail-section"><div class="dl-detail-lbl">// دلیل</div><div class="dl-detail-text">${esc(d.reason)}</div></div>`:''}
       <div class="dl-detail-section"><div class="dl-detail-lbl">// نتیجه</div>${outLbl}</div>
       ${d.tags?.length?`<div class="dl-detail-section"><div class="dl-detail-lbl">// برچسب‌ها</div><div class="dl-tags">${d.tags.map(t=>`<span class="dl-tag">${esc(t)}</span>`).join('')}</div></div>`:''}
       <div class="dl-detail-section"><div class="dl-detail-lbl">// تاریخ</div><div class="dl-detail-text">${d.date||'—'}</div></div>
-      <div class="dl-detail-actions">
-        <button class="dl-delete-btn" onclick="DL_delete('${d.id}')">حذف ✕</button>
-        <button class="dl-save-btn" style="flex:2" onclick="DL_openEdit('${d.id}')">ویرایش ✏</button>
-      </div>
+      <div class="dl-detail-actions"><button class="dl-delete-btn" onclick="DL_delete('${d.id}')">حذف ✕</button><button class="dl-save-btn" style="flex:2" onclick="DL_openEdit('${d.id}')">ویرایش ✏</button></div>
     </div>`;
   document.getElementById('dlModal').classList.add('open');
   document.getElementById('dlSheet').scrollTop=0;
 }
-function DL_openEdit(id){
-  const d=DL_decisions.find(x=>x.id===id);if(!d)return;
-  _dlEditId=id;
-  document.getElementById('dlSheetTitle').textContent='ویرایش تصمیم';
-  document.getElementById('dlSheetContent').innerHTML=DL_buildForm(d);
-  const ci=DL_COLORS.indexOf(d.color);
-  if(ci>-1)DL_setColor(ci);
-  DL_setOutcome(d.outcome||'pending');
-}
-function DL_delete(id){
-  haptic(15);
-  DL_decisions=DL_decisions.filter(d=>d.id!==id);
-  DL_save();DL_render();DL_closeModal();showToast('// تصمیم حذف شد');
-}
+function DL_openEdit(id){const d=DL_decisions.find(x=>x.id===id);if(!d)return;_dlEditId=id;document.getElementById('dlSheetTitle').textContent='ویرایش تصمیم';document.getElementById('dlSheetContent').innerHTML=DL_buildForm(d);const ci=DL_COLORS.indexOf(d.color);if(ci>-1)DL_setColor(ci);DL_setOutcome(d.outcome||'pending');}
+function DL_delete(id){haptic(15);DL_decisions=DL_decisions.filter(d=>d.id!==id);DL_save();DL_render();DL_closeModal();showToast('// تصمیم حذف شد');}
 function DL_closeModal(){haptic(6);document.getElementById('dlModal').classList.remove('open');}
 
 /* ══════════════════════════════════════════
    BRIEFING
 ══════════════════════════════════════════ */
-function getGreeting(hour){
-  if(hour>=5&&hour<9)return'🌅 صبح بخیر';if(hour>=9&&hour<12)return'☀️ روز بخیر';
-  if(hour>=12&&hour<15)return'🌤 ظهر';if(hour>=15&&hour<18)return'🌇 عصر بخیر';
-  if(hour>=18&&hour<21)return'🌆 غروب';return'🌙 شب بخیر';
-}
+function getGreeting(hour){if(hour>=5&&hour<9)return'🌅 صبح بخیر';if(hour>=9&&hour<12)return'☀️ روز بخیر';if(hour>=12&&hour<15)return'🌤 ظهر';if(hour>=15&&hour<18)return'🌇 عصر بخیر';if(hour>=18&&hour<21)return'🌆 غروب';return'🌙 شب بخیر';}
 async function loadBriefing(stats){
   const wrap=document.getElementById('briefingWrap');
   const now=new Date();
@@ -1536,9 +1415,7 @@ async function loadBriefing(stats){
 ══════════════════════════════════════════ */
 let passAttempts=0,passBlocked=false,passCdTimer=null,passVisible=false;
 function fp(){try{return btoa([navigator.userAgent,screen.width+'x'+screen.height].join('|')).slice(0,18);}catch(e){return'def';}}
-function loadLockState(){
-  try{const s=JSON.parse(localStorage.getItem('fri_lk5_'+fp())||'{}');if(s.blocked){const el=Math.ceil(3600-(Date.now()-(s.at||0))/1000);if(el>0){showPassBlocked(el);return;}else clearPassLock();}passAttempts=s.a||0;for(let i=0;i<passAttempts;i++){const d=document.getElementById('at'+i);if(d)d.classList.add('used');}}catch(e){}
-}
+function loadLockState(){try{const s=JSON.parse(localStorage.getItem('fri_lk5_'+fp())||'{}');if(s.blocked){const el=Math.ceil(3600-(Date.now()-(s.at||0))/1000);if(el>0){showPassBlocked(el);return;}else clearPassLock();}passAttempts=s.a||0;for(let i=0;i<passAttempts;i++){const d=document.getElementById('at'+i);if(d)d.classList.add('used');}}catch(e){}}
 function savePassLock(b){try{localStorage.setItem('fri_lk5_'+fp(),JSON.stringify(b?{blocked:true,at:Date.now(),a:passAttempts}:{a:passAttempts}));}catch(e){}}
 function clearPassLock(){try{localStorage.removeItem('fri_lk5_'+fp());passAttempts=0;}catch(e){}}
 function onPassType(){if(passBlocked)return;const v=document.getElementById('passInp').value;let score=0;if(v.length>=8)score+=20;if(v.length>=14)score+=15;if(/[A-Z]/.test(v))score+=15;if(/[a-z]/.test(v))score+=15;if(/[0-9]/.test(v))score+=15;if(/[^A-Za-z0-9]/.test(v))score+=20;score=Math.min(score,100);const col=score<30?'#e04040':score<60?'#c09020':'#40a060';const sf=document.getElementById('strFill');sf.style.width=score+'%';sf.style.background=col;document.getElementById('passInp').classList.remove('err','ok');}
@@ -1560,32 +1437,23 @@ function tryPassEnter(){
     else{savePassLock(false);const rem=3-passAttempts;msg.className='lk-msg err';msg.textContent=`// wrong · ${rem} attempt${rem===1?'':'s'} left`;}
   }
 }
-function showPassBlocked(secs){
-  passBlocked=true;document.getElementById('lkMain').style.display='none';document.getElementById('lockBlocked').classList.add('show');
-  let r=secs;updatePassCd(r);
-  passCdTimer=setInterval(()=>{r--;updatePassCd(r);if(r<=0){clearInterval(passCdTimer);passBlocked=false;passAttempts=0;clearPassLock();document.getElementById('lockBlocked').classList.remove('show');document.getElementById('lkMain').style.cssText='display:flex;flex-direction:column;align-items:center;width:100%;';document.querySelectorAll('.lk-dot').forEach(d=>d.classList.remove('used'));document.getElementById('passInp').focus();}},1000);
-}
+function showPassBlocked(secs){passBlocked=true;document.getElementById('lkMain').style.display='none';document.getElementById('lockBlocked').classList.add('show');let r=secs;updatePassCd(r);passCdTimer=setInterval(()=>{r--;updatePassCd(r);if(r<=0){clearInterval(passCdTimer);passBlocked=false;passAttempts=0;clearPassLock();document.getElementById('lockBlocked').classList.remove('show');document.getElementById('lkMain').style.cssText='display:flex;flex-direction:column;align-items:center;width:100%;';document.querySelectorAll('.lk-dot').forEach(d=>d.classList.remove('used'));document.getElementById('passInp').focus();}},1000);}
 function updatePassCd(s){const m=String(Math.floor(s/60)).padStart(2,'0'),ss=String(s%60).padStart(2,'0');document.getElementById('lockCd').textContent=m+':'+ss;}
 function lockApp(){haptic(15);document.getElementById('app').style.display='none';const ls=document.getElementById('lockScreen');ls.style.display='flex';ls.style.opacity='1';document.getElementById('lkMain').style.cssText='display:flex;flex-direction:column;align-items:center;width:100%;';document.getElementById('lockSuccess').classList.remove('show');document.getElementById('lockBlocked').classList.remove('show');document.getElementById('passInp').value='';document.getElementById('strFill').style.width='0%';document.getElementById('lockMsg').className='lk-msg';document.getElementById('lockMsg').textContent='// type your passphrase';document.getElementById('passInp').focus();}
 loadLockState();
 setTimeout(()=>{const inp=document.getElementById('passInp');if(inp&&!passBlocked)inp.focus();},200);
 
 /* ══════════════════════════════════════════
-   THEME
+   THEME — فقط load + open/close  (محتوا در ThemeUpgrade.js)
 ══════════════════════════════════════════ */
 function loadTheme(){
   const t=localStorage.getItem('fri_theme3')||'sand';
   document.body.setAttribute('data-theme',t);
-  document.querySelectorAll('.tbtn').forEach(b=>b.classList.toggle('active',b.dataset.t===t));
 }
-function setTheme(t,el){
-  haptic(8);document.body.setAttribute('data-theme',t);localStorage.setItem('fri_theme3',t);
-  document.querySelectorAll('.tbtn').forEach(b=>b.classList.toggle('active',b.dataset.t===t));
-  const map=THEME_BG_MAP[t];
-  if(map)BG.setStyle(map.style,map.colors);
-  closeTheme();
+function openTheme(){
+  // ThemeUpgrade.js این تابع رو override می‌کنه
+  document.getElementById('themeSheet').classList.add('open');
 }
-function openTheme(){document.getElementById('themeSheet').classList.add('open');}
 function closeTheme(){document.getElementById('themeSheet').classList.remove('open');}
 loadTheme();
 
@@ -1680,7 +1548,6 @@ function linkThumbCard(l){const ck=catKey(l.category);if(ck==='yt'){const s=getY
 ══════════════════════════════════════════ */
 function initApp(){
   updateClock();setInterval(updateClock,10000);updateNavPill();
-  // Apply bg style for saved theme
   const t=localStorage.getItem('fri_theme3')||'sand';
   const map=THEME_BG_MAP[t];if(map)BG.setStyle(map.style,map.colors);
   loadedPages.home=true;loadHome();
