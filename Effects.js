@@ -6,7 +6,7 @@
 /* ══════════════════════════════════════════
    1. RIPPLE EFFECT
 ══════════════════════════════════════════ */
-(function initRipple() {
+function initRipple() {
   const style = document.createElement('style');
   style.textContent = `
     .ripple-host { position: relative; overflow: hidden; }
@@ -56,7 +56,7 @@
 /* ══════════════════════════════════════════
    2. PARALLAX DEPTH (DeviceMotion + scroll)
 ══════════════════════════════════════════ */
-(function initParallax() {
+function initParallax() {
   const style = document.createElement('style');
   style.textContent = `
     .parallax-card {
