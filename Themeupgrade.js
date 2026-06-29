@@ -197,14 +197,6 @@ window.TU_pick = function(t, el) {
   closeTheme();
 };
 
-/* ══ HOOK openTheme ══ */
-const _origOpen = window.openTheme;
-window.openTheme = function() {
-  TU_buildGrid();
-  if (_origOpen) _origOpen();
-  else document.getElementById('themeSheet').classList.add('open');
-};
-
 /* ══ اولین بار هم بساز ══ */
 document.addEventListener('DOMContentLoaded', () => {
   setTimeout(TU_buildGrid, 200);
