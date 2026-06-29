@@ -1,6 +1,5 @@
 /* ══════════════════════════════════════════
    THEMEUPGRADE.JS — F.R.I.D.A.Y OS
-   آیکون‌های مینیمال + canvas انیمیشن منحصربفرد هر تم
 ══════════════════════════════════════════ */
 
 const THEME_ICONS = {
@@ -41,6 +40,29 @@ const THEME_META = {
   aurora:   { accent:'#00e8c0', bg:'#04080e', dark:true  },
 };
 
+/* ══════════════════════════════════════════
+   COLOR MAP — opacity بالا، هر تم متمایز
+   این جایگزین THEME_BG_MAP داخل HTML میشه
+══════════════════════════════════════════ */
+const TU_BG_MAP = {
+  sand:     { style:'particles', colors:['rgba(176,125,58,.38)','rgba(74,140,106,.28)','rgba(192,82,42,.22)'] },
+  rose:     { style:'petals',    colors:['rgba(192,80,74,.38)','rgba(138,48,96,.30)','rgba(208,112,48,.24)'] },
+  arctic:   { style:'grid',      colors:['rgba(36,112,184,.36)','rgba(80,64,160,.28)','rgba(42,144,96,.22)'] },
+  sage:     { style:'particles', colors:['rgba(58,122,58,.38)','rgba(96,96,32,.30)','rgba(42,96,144,.22)'] },
+  lavender: { style:'petals',    colors:['rgba(106,58,176,.40)','rgba(176,64,160,.32)','rgba(42,128,96,.24)'] },
+  paper:    { style:'grid',      colors:['rgba(0,0,0,.13)','rgba(0,0,0,.10)','rgba(0,0,0,.07)'] },
+  midnight: { style:'stars',     colors:['rgba(80,144,224,.50)','rgba(144,96,224,.40)','rgba(48,192,128,.32)'] },
+  carbon:   { style:'grid',      colors:['rgba(220,220,220,.22)','rgba(200,200,200,.18)','rgba(96,192,112,.16)'] },
+  forest:   { style:'particles', colors:['rgba(74,200,112,.45)','rgba(160,216,64,.36)','rgba(96,184,192,.28)'] },
+  sunset:   { style:'aurora',    colors:['rgba(240,112,48,.48)','rgba(224,64,128,.38)','rgba(240,176,48,.30)'] },
+  ocean:    { style:'waves',     colors:['rgba(0,180,224,.45)','rgba(0,96,192,.36)','rgba(0,212,160,.28)'] },
+  neon:     { style:'neon',      colors:['rgba(192,0,255,.52)','rgba(0,232,255,.44)','rgba(255,0,128,.36)'] },
+  copper:   { style:'particles', colors:['rgba(200,128,48,.45)','rgba(224,160,64,.36)','rgba(96,192,128,.28)'] },
+  slate:    { style:'grid',      colors:['rgba(104,152,216,.42)','rgba(152,144,208,.34)','rgba(72,200,168,.26)'] },
+  crimson:  { style:'aurora',    colors:['rgba(224,32,90,.48)','rgba(255,96,144,.38)','rgba(96,208,192,.28)'] },
+  aurora:   { style:'aurora',    colors:['rgba(0,232,192,.50)','rgba(128,64,255,.40)','rgba(255,64,128,.32)'] },
+};
+
 /* ══ CSS ══ */
 (function injectCSS() {
   const el = document.getElementById('__tuStyle');
@@ -49,74 +71,39 @@ const THEME_META = {
   s.id = '__tuStyle';
   s.textContent = `
     .theme-inner { padding-bottom: 80px !important; }
-
-    .tu-grid {
-      display: grid;
-      grid-template-columns: repeat(4,1fr);
-      gap: 7px;
-      margin-bottom: 14px;
-    }
-
+    .tu-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:7px; margin-bottom:14px; }
     .tu-btn {
-      border-radius: 14px;
-      padding: 10px 5px 8px;
-      border: 1.5px solid rgba(128,128,128,.12);
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 5px;
-      position: relative;
-      overflow: hidden;
-      transition: transform .2s, border-color .2s;
-      -webkit-tap-highlight-color: transparent;
+      border-radius:14px; padding:10px 5px 8px;
+      border:1.5px solid rgba(128,128,128,.12);
+      cursor:pointer; display:flex; flex-direction:column;
+      align-items:center; gap:5px; position:relative;
+      overflow:hidden; transition:transform .2s,border-color .2s;
+      -webkit-tap-highlight-color:transparent;
     }
-    .tu-btn:active { transform: scale(.88); }
-    .tu-btn.tu-active { border-color: var(--tu-accent) !important; }
+    .tu-btn:active { transform:scale(.88); }
+    .tu-btn.tu-active { border-color:var(--tu-accent) !important; }
     .tu-btn.tu-active::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: var(--tu-accent);
-      opacity: .07;
-      pointer-events: none;
+      content:''; position:absolute; inset:0;
+      background:var(--tu-accent); opacity:.07; pointer-events:none;
     }
     .tu-btn.tu-active .tu-dot { opacity:1; transform:scale(1); }
-
     .tu-dot {
-      position: absolute; top: 5px; right: 5px;
-      width: 5px; height: 5px; border-radius: 50%;
-      background: var(--tu-accent);
-      opacity: 0; transform: scale(0);
-      transition: all .2s;
+      position:absolute; top:5px; right:5px;
+      width:5px; height:5px; border-radius:50%;
+      background:var(--tu-accent); opacity:0; transform:scale(0);
+      transition:all .2s;
     }
-
-    .tu-icon {
-      width: 34px; height: 34px; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .tu-icon svg { width: 18px; height: 18px; }
-
-    .tu-name {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 5.5px; letter-spacing: .6px; font-weight: 700;
-    }
-
-    .tu-bar {
-      width: 65%; height: 2px; border-radius: 2px;
-    }
-    .tu-btn.tu-active .tu-bar { width: 85%; }
-
+    .tu-icon { width:34px; height:34px; border-radius:10px; display:flex; align-items:center; justify-content:center; }
+    .tu-icon svg { width:18px; height:18px; }
+    .tu-name { font-family:'JetBrains Mono',monospace; font-size:5.5px; letter-spacing:.6px; font-weight:700; }
+    .tu-bar { width:65%; height:2px; border-radius:2px; }
+    .tu-btn.tu-active .tu-bar { width:85%; }
     .tu-divider {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 6.5px; color: var(--text3);
-      letter-spacing: 1.5px;
-      margin: 4px 0 9px;
-      display: flex; align-items: center; gap: 8px;
+      font-family:'JetBrains Mono',monospace; font-size:6.5px;
+      color:var(--text3); letter-spacing:1.5px; margin:4px 0 9px;
+      display:flex; align-items:center; gap:8px;
     }
-    .tu-divider::after {
-      content: ''; flex: 1; height: 1px;
-      background: var(--border);
-    }
+    .tu-divider::after { content:''; flex:1; height:1px; background:var(--border); }
   `;
   document.head.appendChild(s);
 })();
@@ -126,27 +113,22 @@ function TU_buildGrid() {
   const inner = document.querySelector('.theme-inner');
   if (!inner) return;
 
-  const cur = document.body.getAttribute('data-theme') || 'sand';
+  const cur   = document.body.getAttribute('data-theme') || 'sand';
   const light = ['sand','rose','arctic','sage','lavender','paper'];
   const dark  = ['midnight','carbon','forest','sunset','ocean','neon','copper','slate','crimson','aurora'];
 
   function btn(t) {
-    const m = THEME_META[t] || {};
+    const m   = THEME_META[t] || {};
     const ico = THEME_ICONS[t] || '';
-    const accentCSS = m.accent || '#888';
-    const bgCSS = m.bg || '#fff';
-    const nameColor = m.dark ? m.accent : m.accent;
+    const ac  = m.accent || '#888';
     return `
-      <button class="tu-btn ${t===cur?'tu-active':''}"
-              data-t="${t}"
-              style="background:${bgCSS}; --tu-accent:${accentCSS};"
+      <button class="tu-btn ${t===cur?'tu-active':''}" data-t="${t}"
+              style="background:${m.bg||'#fff'};--tu-accent:${ac};"
               onclick="TU_pick('${t}',this)">
         <div class="tu-dot"></div>
-        <div class="tu-icon" style="background:${accentCSS}20; color:${accentCSS};">
-          ${ico}
-        </div>
-        <div class="tu-name" style="color:${nameColor};">${t.toUpperCase()}</div>
-        <div class="tu-bar" style="background:${accentCSS};"></div>
+        <div class="tu-icon" style="background:${ac}20;color:${ac};">${ico}</div>
+        <div class="tu-name" style="color:${ac};">${t.toUpperCase()}</div>
+        <div class="tu-bar" style="background:${ac};"></div>
       </button>`;
   }
 
@@ -165,39 +147,39 @@ function TU_buildGrid() {
 
 /* ══ PICK ══ */
 window.TU_pick = function(t, el) {
-  // ripple morph اگه Effects.js لود شده
-  if (window.THEME_MORPH_TRIGGER) {
-    const rect = el.getBoundingClientRect();
-    const x = rect.left + rect.width / 2;
-    const y = rect.top  + rect.height / 2;
-    const m = THEME_META[t];
-    window.THEME_MORPH_TRIGGER(x, y, (m?.accent||'#888') + '22');
-  }
-
-  // اعمال تم
+  // اعمال data-theme
   document.body.setAttribute('data-theme', t);
   localStorage.setItem('fri_theme3', t);
 
-  // آپدیت canvas bg
-  if (window.THEME_BG_MAP && window.BG) {
-    const map = window.THEME_BG_MAP[t];
+  // BG engine — از TU_BG_MAP با opacity بالا
+  if (window.BG) {
+    const map = TU_BG_MAP[t];
     if (map) window.BG.setStyle(map.style, map.colors);
   }
 
-  // آپدیت active state در grid
+  // آپدیت active در grid
   document.querySelectorAll('.tu-btn').forEach(b => {
     b.classList.toggle('tu-active', b.dataset.t === t);
-  });
-  // active state grid قدیمی هم (اگه هنوز باشه)
-  document.querySelectorAll('.tbtn').forEach(b => {
-    b.classList.toggle('active', b.dataset.t === t);
   });
 
   if (typeof haptic === 'function') haptic(8);
   closeTheme();
 };
 
-/* ══ اولین بار هم بساز ══ */
-document.addEventListener('DOMContentLoaded', () => {
+/* ══ همگام‌سازی BG هنگام initApp ══ */
+(function syncBGOnInit() {
+  const _orig = window.initApp;
+  window.initApp = function() {
+    _orig && _orig();
+    const t   = localStorage.getItem('fri_theme3') || 'sand';
+    const map = TU_BG_MAP[t];
+    if (map && window.BG) window.BG.setStyle(map.style, map.colors);
+  };
+})();
+
+/* ══ اولین بار ══ */
+if (document.readyState !== 'loading') {
   setTimeout(TU_buildGrid, 200);
-});
+} else {
+  document.addEventListener('DOMContentLoaded', () => setTimeout(TU_buildGrid, 200));
+}
