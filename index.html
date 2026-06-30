@@ -1494,9 +1494,16 @@ function navTo(btn){const p=btn.dataset.page;if(p===curPage)return;haptic(8);doc
 function navToByPage(p){const btn=document.querySelector(`.ni[data-page="${p}"]`);if(btn)navTo(btn);}
 function openMoreSub(which){haptic(8);document.querySelectorAll('.page').forEach(pg=>pg.classList.remove('active'));document.getElementById('page-'+which).classList.add('active');curPage=which;document.getElementById('pages').scrollTop=0;if(!loadedPages[which]){loadPage(which);loadedPages[which]=true;}document.querySelectorAll('.ni').forEach(b=>b.classList.toggle('active',b.dataset.page==='more'));updateNavPill();}
 function loadPage(p){
-  if(p==='home')loadHome();else if(p==='movies')loadMovies();else if(p==='bank')BT_load&&BT_load();
-  else if(p==='links')loadLinks();else if(p==='news')loadNews();else if(p==='stats')loadStats();
-  else if(p==='clock')loadWorldClock();else if(p==='archive')loadArchive();else if(p==='pass')loadPasswords();
+  if(p==='home')loadHome();
+  else if(p==='movies')loadMovies();
+  else if(p==='bank')BT_load&&BT_load();
+  else if(p==='links')loadLinks();
+  else if(p==='news')loadNews();
+  else if(p==='stats')loadStats();
+  else if(p==='clock')loadWorldClock();
+  else if(p==='archive')loadArchive();
+  else if(p==='pass')loadPasswords();           // اگر قبلاً داشتی
+  else if(p==='adult') loadAdultPage();         // ← این خط رو اضافه کن
 }
 
 /* ══════════════════════════════════════════
