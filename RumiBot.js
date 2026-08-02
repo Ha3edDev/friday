@@ -1,8 +1,9 @@
 /* ═══════════════════════════════════════════════════════════════
    RUMIBOT.JS — آمار ربات تلگرامی رومی
+   ⚠️ توجه: ثابت API_RUMI از قبل توی فایل HTML اصلی (index.html)
+   تعریف شده — عمداً اینجا دوباره تعریف نشده، وگرنه باعث خطای
+   "Identifier already declared" میشه و کل این فایل اجرا نمیشه.
 ═══════════════════════════════════════════════════════════════ */
-
-const API_RUMI = 'اینجا آدرس WEB_APP_URL ربات رومی رو بذار';
 
 async function loadRumiStats(){
   try{
@@ -43,14 +44,16 @@ function renderRumiCard(data){
   if(!data) return '<div class="empty">// اتصال به ربات رومی برقرار نشد</div>';
   const t = data.totals;
 
-  const toolsHtml = data.topTools.slice(0,5).map((tool,i)=>
-    `<div class="s3-prof-row">
-      <span class="s3-prof-rank">#${i+1}</span>
-      <span class="s3-prof-lbl">${esc(tool.label)}</span>
-      <div class="s3-prof-track"><div class="s3-prof-fill" style="width:${Math.round((tool.count/data.topTools[0].count)*100)}%"></div></div>
-      <span class="s3-prof-cnt">${tool.count}</span>
-    </div>`
-  ).join('');
+  const toolsHtml = data.topTools.length
+    ? data.topTools.slice(0,5).map((tool,i)=>
+        `<div class="s3-prof-row">
+          <span class="s3-prof-rank">#${i+1}</span>
+          <span class="s3-prof-lbl">${esc(tool.label)}</span>
+          <div class="s3-prof-track"><div class="s3-prof-fill" style="width:${Math.round((tool.count/data.topTools[0].count)*100)}%"></div></div>
+          <span class="s3-prof-cnt">${tool.count}</span>
+        </div>`
+      ).join('')
+    : '<div class="empty">// هنوز ابزاری استفاده نشده</div>';
 
   const ref48 = data.referrals.last48h.length
     ? data.referrals.last48h.map(rumiReferralRow).join('')
@@ -81,4 +84,8 @@ async function RB_load(){
   wrap.innerHTML = '<div class="stats-spinner-wrap"><div class="stats-ring"></div><div class="stats-loading-txt">// در حال اتصال به رومی...</div></div>';
   const data = await loadRumiStats();
   wrap.innerHTML = renderRumiCard(data);
+}
+
+function reloadRumiStats(){
+  RB_load();
 }
