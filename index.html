@@ -634,12 +634,14 @@ body{background:var(--bg0);color:var(--text1);font-family:'Vazirmatn',sans-serif
 
     <!-- STATS -->
     <div class="page" id="page-stats">
-      <div class="pg-head">
-        <div style="flex:1"><div class="pg-title">آمار</div><div class="pg-sub">// ANALYTICS</div></div>
-        <button class="rfbtn" onclick="reloadStats()">↺ بروز</button>
-      </div>
-      <div id="statsMain"><div class="stats-spinner-wrap"><div class="stats-ring"></div><div class="stats-loading-txt">// CONNECTING...</div></div></div>
-    </div>
+  <div class="pg-head">
+    <div style="flex:1"><div class="pg-title">آمار</div><div class="pg-sub">// ANALYTICS</div></div>
+    <button class="rfbtn" onclick="reloadStats()">↺ بروز</button>
+  </div>
+  <div class="sec">آمار ربات رومی</div>
+  <div id="rumiStatsWrap"></div>
+  <div id="statsMain"><div class="stats-spinner-wrap"><div class="stats-ring"></div><div class="stats-loading-txt">// CONNECTING...</div></div></div>
+</div>
 
     <!-- CLOCK — مستقیم از ناو -->
     <div class="page" id="page-clock">
@@ -731,6 +733,7 @@ body{background:var(--bg0);color:var(--text1);font-family:'Vazirmatn',sans-serif
 const API_NEW   = 'https://script.google.com/macros/s/AKfycbw1p_G2IUuPX0Nkajj6sWoiZb9xac8WLou0MhW6RvvPGM42fZ2yCtkasdFMWmeekOzIgQ/exec';
 const API_APP   = 'https://script.google.com/macros/s/AKfycbza2JeMqLyPi2qEe_dpQNFATN2T_yyUNpfITy3Lf66E8DZmSSXKefq1AhITXpzt30m_Zw/exec';
 const API_STATS = 'https://script.google.com/macros/s/AKfycbwLCQxFGF3TDZshRt9MBtaOUgvGxg0ua_-DYftDHCsmUAKMlco3sHy7a9ytDRzOaWuP/exec';
+const API_RUMI = 'https://script.google.com/macros/s/AKfycbwetFIUbibT7Xhr2s4w9X3rEHGHvHuRPQEoKb26xdiyR_zV9V0zLYYLS8ur4lvE2J7MRw/exec';
 const PASSPHRASE = '8*ft2baM@F2h!$#b';
 const TMDB_KEY  = '7f4da1835dba2e5e31784fdb9020915d';
 const TMDB_IMG  = 'https://image.tmdb.org/t/p/w342';
@@ -1204,7 +1207,10 @@ function copyText(t){haptic(15);navigator.clipboard?.writeText(t).then(()=>showT
 /* ══ STUBS ══ */
 function loadMovies(){if(typeof BM_load==='function')BM_load();else document.getElementById('moviesWrap').innerHTML='<div class="empty">// Movies.js not loaded</div>';}
 function loadLinks(){if(typeof BL_load==='function')BL_load();else document.getElementById('linkList').innerHTML='<div class="empty">// Links.js not loaded</div>';}
-function loadStats(){if(typeof BS_load==='function')BS_load();else document.getElementById('statsMain').innerHTML='<div class="empty">// Stats.js not loaded</div>';}
+function loadStats(){
+  if(typeof BS_load==='function')BS_load();else document.getElementById('statsMain').innerHTML='<div class="empty">// Stats.js not loaded</div>';
+  if(typeof RB_load==='function')RB_load();
+}
 function reloadStats(){loadedPages.stats=false;loadStats();}
 </script>
 
@@ -1221,5 +1227,6 @@ function reloadStats(){loadedPages.stats=false;loadStats();}
 <script src="Weather5Day.js"></script>
 <script src="QuickNotes.js"></script>
 <script src="Todo.js"></script>
+<script src="RumiBot.js"></script>
 </body>
 </html>
