@@ -633,31 +633,37 @@ body{background:var(--bg0);color:var(--text1);font-family:'Vazirmatn',sans-serif
     </div>
 
     <!-- STATS -->
-    <div class="page" id="page-stats">
+<div class="page" id="page-stats">
   <div class="pg-head">
     <div style="flex:1"><div class="pg-title">آمار</div><div class="pg-sub">// ANALYTICS</div></div>
     <button class="rfbtn" onclick="reloadStats()">↺ بروز</button>
   </div>
-  <div class="sec">آمار ربات رومی</div>
-  <div id="rumiStatsWrap"></div>
   <div id="statsMain"><div class="stats-spinner-wrap"><div class="stats-ring"></div><div class="stats-loading-txt">// CONNECTING...</div></div></div>
 </div>
-
+<!-- RUMI BOT -->
+<div class="page" id="page-rumi">
+  <div class="pg-head">
+    <div style="flex:1"><div class="pg-title">رومی</div><div class="pg-sub">// TELEGRAM BOT</div></div>
+    <button class="rfbtn" onclick="reloadRumiStats()">↺ بروز</button>
+  </div>
+  <div id="rumiStatsWrap"><div class="stats-spinner-wrap"><div class="stats-ring"></div><div class="stats-loading-txt">// CONNECTING...</div></div></div>
+</div>
     <!-- CLOCK — مستقیم از ناو -->
     <div class="page" id="page-clock">
       <div class="pg-head"><div><div class="pg-title">ساعت جهانی</div><div class="pg-sub">// WORLD TIME</div></div></div>
       <div class="clock-grid" id="clockGrid"></div>
     </div>
 
-    <!-- MORE -->
-    <div class="page" id="page-more">
-      <div class="pg-head"><div><div class="pg-title">بیشتر</div><div class="pg-sub">// MODULES</div></div></div>
-      <div class="sheet-menu">
-        <div class="si" onclick="openMoreSub('news')"><span class="si-icon">📰</span><div><div class="si-text">اخبار</div><div class="si-sub">// news feed</div></div><span class="si-arr">›</span></div>
-        <div class="si" onclick="openMoreSub('archive')"><span class="si-icon">📄</span><div><div class="si-text">آرشیو هوشمند</div><div class="si-sub">// smart archive</div></div><span class="si-arr">›</span></div>
-        <div class="si" onclick="openMoreSub('pass')"><span class="si-icon">🔐</span><div><div class="si-text">گاوصندوق رمزها</div><div class="si-sub">// password vault</div></div><span class="si-arr">›</span></div>
-      </div>
-    </div>
+<!-- MORE -->
+<div class="page" id="page-more">
+  <div class="pg-head"><div><div class="pg-title">بیشتر</div><div class="pg-sub">// MODULES</div></div></div>
+  <div class="sheet-menu">
+    <div class="si" onclick="openMoreSub('news')"><span class="si-icon">📰</span><div><div class="si-text">اخبار</div><div class="si-sub">// news feed</div></div><span class="si-arr">›</span></div>
+    <div class="si" onclick="openMoreSub('archive')"><span class="si-icon">📄</span><div><div class="si-text">آرشیو هوشمند</div><div class="si-sub">// smart archive</div></div><span class="si-arr">›</span></div>
+    <div class="si" onclick="openMoreSub('pass')"><span class="si-icon">🔐</span><div><div class="si-text">گاوصندوق رمزها</div><div class="si-sub">// password vault</div></div><span class="si-arr">›</span></div>
+    <div class="si" onclick="openMoreSub('rumi')"><span class="si-icon">🤖</span><div><div class="si-text">ربات رومی</div><div class="si-sub">// telegram bot stats</div></div><span class="si-arr">›</span></div>
+  </div>
+</div>
 
     <!-- ARCHIVE -->
     <div class="page" id="page-archive">
@@ -955,6 +961,7 @@ function loadPage(p){
   else if(p==='clock')loadWorldClock();
   else if(p==='archive')loadArchive();
   else if(p==='pass')loadPasswords();
+  else if(p==='rumi')reloadRumiStats();
 }
 
 /* ══ CLOCK ══ */
@@ -1209,7 +1216,6 @@ function loadMovies(){if(typeof BM_load==='function')BM_load();else document.get
 function loadLinks(){if(typeof BL_load==='function')BL_load();else document.getElementById('linkList').innerHTML='<div class="empty">// Links.js not loaded</div>';}
 function loadStats(){
   if(typeof BS_load==='function')BS_load();else document.getElementById('statsMain').innerHTML='<div class="empty">// Stats.js not loaded</div>';
-  if(typeof RB_load==='function')RB_load();
 }
 function reloadStats(){loadedPages.stats=false;loadStats();}
 </script>
